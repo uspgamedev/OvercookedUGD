@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour
 
     void Update(){
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(player.transform.position.y, 0f, 12f), transform.position.z);
+        transform.position = new Vector3(Mathf.Clamp(player.transform.position.x, 0f, 2f), Mathf.Clamp(player.transform.position.y, 0f, 40f), transform.position.z);
         
     }
         

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/OutsideScene.unity
     guid: e864a1ebdb5d51d4ab6876645d9b323e
+  - enabled: 1
+    path: Assets/Scenes/FirstLevel.unity
+    guid: a4149e6d1f5aebd44836beb65cc2a3d1
   m_configObjects: {}
