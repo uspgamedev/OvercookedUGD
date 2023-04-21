@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //TO-DO: Unite no UseTable
-public class KeepTable : TableScript
+public class KeepTable : TableClass
 {
     public float sliceTime;
     public State stateTransition;

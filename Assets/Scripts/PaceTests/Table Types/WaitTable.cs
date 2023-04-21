@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 //TO-DO: Mais condições no UseTable (?)
-public class WaitTable : TableScript
+public class WaitTable : TableClass
 {
     public float boilTime;
     public float overcookTime;

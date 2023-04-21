@@ -32,11 +32,11 @@ public class PlayerCont : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.X))
             {
-                GetTable().SubstituteAdd();
+                GetTable().tableScript.SubstituteAdd();
             }
             if (Input.GetKeyDown(KeyCode.Z))
             {
-                GetTable().UseTable();
+                GetTable().tableScript.UseTable();
             }
         }
 
@@ -57,7 +57,7 @@ public class PlayerCont : MonoBehaviour
         return Physics2D.Raycast(transform.position, transform.position + transform.up, tableLayer);
     }
 
-    public TableScript GetTable()
+    public Table GetTable()
     {
         //Talvez tanto null acabe gerando bugs imprevistos
         //transform.up é só temporário
@@ -66,10 +66,10 @@ public class PlayerCont : MonoBehaviour
         if (Physics2D.Raycast(transform.position, ray, tableLayer))
         {
             Debug.Log("k1");
-            if (hit.transform.GetComponent<TableScript>() != null)
+            if (hit.transform.GetComponent<Table>() != null)
             {
                 Debug.Log("k2");
-                return hit.transform.GetComponent<TableScript>();
+                return hit.transform.GetComponent<Table>();
             }
             else
                 return null;

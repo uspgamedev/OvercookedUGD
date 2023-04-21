@@ -33,11 +33,6 @@ public class Ingredient
         }
     }
 
-	public static void Concat(Ingredient ing)
-    {
-		
-    }
-
     #region Overrides
 
     public override bool Equals(object obj)
@@ -83,6 +78,10 @@ public class Tuple
 	public Ingredient ingredient;
 	public State state;
 
+	public Tuple()
+    {
+		ingredient = new Ingredient();
+    }
 	public Tuple(Ingredient ing, State stt)
 	{
 		ingredient = ing;
