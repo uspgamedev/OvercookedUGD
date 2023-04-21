@@ -8,7 +8,7 @@ public class GrabObjects : MonoBehaviour
     [SerializeField] private Transform RayPoint;
     [SerializeField] private float RayDistance;
 
-    private GameObject GrabbedObject;
+    public GameObject GrabbedObject;
     private int LayerIndex;
 
     // Start is called before the first frame update
@@ -28,12 +28,14 @@ public class GrabObjects : MonoBehaviour
             {
                 GrabbedObject = hitInfo.collider.gameObject;
                 GrabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;
+                GrabbedObject.GetComponent<CircleCollider2D>().enabled = false;
                 GrabbedObject.transform.position = GrabPoint.position;
                 GrabbedObject.transform.SetParent(transform);
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
                 GrabbedObject.GetComponent<Rigidbody2D>().isKinematic = false;
+                GrabbedObject.GetComponent<CircleCollider2D>().enabled = true;
                 GrabbedObject.transform.SetParent(null);
                 GrabbedObject = null;
             }
