@@ -24,7 +24,7 @@ public class GrabObjects : MonoBehaviour
 
         if (hitInfo.collider != null && hitInfo.collider.gameObject.layer == LayerIndex)
         {
-            if (Input.GetKeyDown(KeyCode.E) && GrabbedObject == null)
+            if (GrabbedObject == null && Input.GetKeyDown(KeyCode.E))
             {
                 GrabbedObject = hitInfo.collider.gameObject;
                 GrabbedObject.GetComponent<Rigidbody2D>().isKinematic = true;

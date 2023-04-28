@@ -30,7 +30,7 @@ public class Spawner : MonoBehaviour
     }
     private void Spawn()
     {
-        if ((Input.GetKeyDown(KeyCode.E)) && GameManager.Instance.player.GetComponent<GrabObjects>().GrabbedObject == null && IsInsideTrigger == true)
+        if (GameManager.Instance.player.GetComponent<GrabObjects>().GrabbedObject == null && IsInsideTrigger == true && (Input.GetKeyDown(KeyCode.E)))
         {
             Instantiate(ObjectToBeSpawned, SpawnPoint.position, Quaternion.identity);
         }
