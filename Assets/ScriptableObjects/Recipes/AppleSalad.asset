@@ -15,4 +15,4 @@ MonoBehaviour:
   dishRecipe:
   - {fileID: 11400000, guid: 7774ed983546e1848935a69d5d5c8982, type: 2}
   - {fileID: 11400000, guid: a4075339d23fe544796f7877f65936a5, type: 2}
-  dishName: AppleSalad
+  dishName: Apple Salad
