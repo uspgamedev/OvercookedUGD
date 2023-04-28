@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - GrabObjects
   - 
   - 
   - 
@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 93553415
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Forniture
+    uniqueID: 3934003137
     locked: 0
