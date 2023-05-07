@@ -4,8 +4,11 @@ using UnityEngine;
 
 
 [CreateAssetMenu(fileName = "Scriptables", menuName ="Scriptable Objects/Tuple Scriptable")]
-public class IngredientsScriptable : ScriptableObject
+public class TupleSO : ScriptableObject
 {
     public Ingredient ingredient;
     public State state;
+    public Sprite tupleSprite;
+
+    public Tuple tuple => new Tuple(ingredient, state, tupleSprite);
 }

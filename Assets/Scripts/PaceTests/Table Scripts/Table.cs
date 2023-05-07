@@ -5,8 +5,8 @@ using UnityEngine;
 public class Table : MonoBehaviour
 {
     public TableType tableType;
-    public IngredientsScriptable initialTuple;
-    public PlayerCont player;
+    public TupleSO initialTuple;
+    public PlayerController player;
     public int capacity = 1;
 
     public float spawnRate;
@@ -72,10 +72,13 @@ public class Table : MonoBehaviour
         int length = initialTuple.ingredient.ingredientArray.Length;
         for (int i = 0; i < length; i++)
         {
+            table.tableTuple[0] = Tuple.CopyTuple(initialTuple.tuple);
+            /*
             table.tableTuple[0].ingredient.ingredientArray[i] = initialTuple.ingredient.ingredientArray[i];
-            table.tableTuple[0].ingredient.overcookeable = initialTuple.ingredient.overcookeable;
+            table.tableTuple[0].ingredient.overcookable = initialTuple.ingredient.overcookable;
             table.tableTuple[0].ingredient.mixeable = initialTuple.ingredient.mixeable;
             table.tableTuple[0].ingredient.sliceable = initialTuple.ingredient.sliceable;
+            */
         }
 
         if(table is SpawnTable)

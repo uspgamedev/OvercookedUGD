@@ -7,8 +7,8 @@ using UnityEngine;
 //TO-DO: deixar a troca de ingredientes mais conveniente
 public abstract class TableClass : MonoBehaviour
 {
-    public PlayerCont player;
-    //public IngredientsScriptable tupleScriptable;
+    public PlayerController player;
+    //public TupleSO tupleScriptable;
     public Tuple[] tableTuple;
     public int capacity = 1;
 

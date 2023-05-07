@@ -31,7 +31,7 @@ public class WaitTable : TableClass
             {
                 Unite();
                 Tuple.ChangeState(tableTuple[0], stateTransition);
-                tableTuple[0].ingredient.overcookeable = true;
+                tableTuple[0].ingredient.overcookable = true;
             }
             else if (timer >= overcookTime)
             {

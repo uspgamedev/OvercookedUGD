@@ -10,13 +10,12 @@ public class PlayerMovement : MonoBehaviour
 
     Vector2 movement;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    //Tuples
+    public Tuple currentTuple;
+    //Tables
+    [SerializeField] LayerMask tableLayer;
 
-    // Update is called once per frame
+
     void Update()
     {
         movement.x = Input.GetAxisRaw("Horizontal");
@@ -27,11 +26,50 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("SpeedHorizontal", movement.x);
         animator.SetFloat("SpeedVertical", movement.y);
         animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        if (Input.GetKeyDown(KeyCode.X) && CheckTable())
+        {
+            GetTable().tableScript.SubstituteAdd();
+            UIManager.Instance.ChangeImage(currentTuple.sprite);
+        }
+        if (Input.GetKeyDown(KeyCode.Z) && CheckTable())
+        {
+            GetTable().tableScript.UseTable();
+            UIManager.Instance.ChangeImage(currentTuple.sprite);
+        }
     }
 
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+    }
+
+    public bool CheckTable()
+    {
+        //transform.up é só temporário
+        return Physics2D.Raycast(transform.position, transform.position + transform.up, tableLayer);
+    }
+
+    public Table GetTable()
+    {
+        //Talvez tanto null acabe gerando bugs imprevistos
+        //transform.up é só temporário
+        Vector3 ray = transform.up;
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, ray, tableLayer);
+        if (Physics2D.Raycast(transform.position, ray, tableLayer))
+        {
+            Debug.Log("k1");
+            Debug.Log("Raycast: " + hit.collider.gameObject);
+            if (hit.transform.GetComponent<Table>() != null)
+            {
+                Debug.Log("k2");
+                return hit.transform.GetComponent<Table>();
+            }
+            else
+                return null;
+        }
+        else
+            return null;
     }
 
 }

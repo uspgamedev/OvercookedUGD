@@ -3,16 +3,16 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerCont : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
+    public float moveSpeed;
+    public Rigidbody2D rb;
+    public Animator animator;
+
+    Vector2 movement;
+
     //Tables
-    [SerializeField] LayerMask tableLayer;
-
-    //Movimento
-    public float speed;
-    private float horizontal;
-    private float vertical;
-
+    [SerializeField] LayerMask tableLayer;    
     //Tuples
     public Tuple currentTuple;
 
@@ -23,32 +23,29 @@ public class PlayerCont : MonoBehaviour
 
     void Update()
     {
-        //Movimento: talvez um pouco de aceleração (mas deaceleração provavelmente não) possa ajudar
-        horizontal = Input.GetAxisRaw("Horizontal");
-        vertical = Input.GetAxisRaw("Vertical");
+        movement.x = Input.GetAxisRaw("Horizontal");
+        movement.y = Input.GetAxisRaw("Vertical");
 
+        movement = new Vector2(movement.x, movement.y).normalized;
 
-        if (CheckTable())
+        animator.SetFloat("SpeedHorizontal", movement.x);
+        animator.SetFloat("SpeedVertical", movement.y);
+        animator.SetFloat("Speed", movement.sqrMagnitude);
+
+        if (Input.GetKeyDown(KeyCode.X) && CheckTable())
         {
-            if (Input.GetKeyDown(KeyCode.X))
-            {
-                GetTable().tableScript.SubstituteAdd();
-            }
-            if (Input.GetKeyDown(KeyCode.Z))
-            {
-                GetTable().tableScript.UseTable();
-            }
+            GetTable().tableScript.SubstituteAdd();
+            UIManager.Instance.ChangeImage(currentTuple.sprite);
         }
-
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.Z) && CheckTable())
         {
-            Debug.Log(currentTuple.ingredient.ingredientArray.Count());
+            GetTable().tableScript.UseTable();
+            UIManager.Instance.ChangeImage(currentTuple.sprite);
         }
     }
-
-    private void FixedUpdate()
+    void FixedUpdate()
     {
-        transform.position = Vector2.MoveTowards(transform.position, transform.position + new Vector3(horizontal, vertical), speed * Time.fixedDeltaTime);
+        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
     }
 
     public bool CheckTable()
@@ -66,6 +63,7 @@ public class PlayerCont : MonoBehaviour
         if (Physics2D.Raycast(transform.position, ray, tableLayer))
         {
             Debug.Log("k1");
+            Debug.Log("Raycast: " + hit.collider.gameObject);
             if (hit.transform.GetComponent<Table>() != null)
             {
                 Debug.Log("k2");
