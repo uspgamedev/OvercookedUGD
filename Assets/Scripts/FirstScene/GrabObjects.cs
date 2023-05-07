@@ -31,6 +31,9 @@ public class GrabObjects : MonoBehaviour
                 GrabbedObject.GetComponent<CircleCollider2D>().enabled = false;
                 GrabbedObject.transform.position = GrabPoint.position;
                 GrabbedObject.transform.SetParent(transform);
+                Debug.Log(GrabbedObject.GetComponent<SpriteRenderer>().sprite);
+                UIManager.Instance.ChangeImage(GrabbedObject.GetComponent<SpriteRenderer>().sprite);
+
             }
             else if (Input.GetKeyDown(KeyCode.E))
             {
