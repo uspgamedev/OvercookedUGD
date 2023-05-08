@@ -1,15 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
+//Essa classe é responsável por inicializar as tábuas. Ela serve de intermediária entre TableClass e TableEditor, que possibilita um custom inspector pras tábuas
+//no inspector.
 public class Table : MonoBehaviour
 {
     public TableType tableType;
     public TupleSO initialTuple;
-    public PlayerController player;
     public int capacity = 1;
 
     public float spawnRate;
+
+    [SerializeField] SpriteRenderer foodRenderer;
 
     public float sliceTime;
     public State stateTransition;
@@ -22,6 +26,7 @@ public class Table : MonoBehaviour
 
     private void Awake()
     {
+        //Inicializa a tábua
         GenerateTable();
     }
 
@@ -57,31 +62,22 @@ public class Table : MonoBehaviour
                 tableScript = gameObject.AddComponent<FinalTable>();
             CopyValues(tableScript);
         }
+
+        tableScript.foodRenderer = foodRenderer;
+        tableScript.PaintTable();
     }
     
     private void CopyValues(TableClass table)
     {
-        table.player = player;
+        //Inicializa a tábua a partir do TupleSO fornecido
         table.capacity = capacity;
 
-        table.tableTuple = new Tuple[capacity];
-        table.tableTuple[0] = new Tuple();
-        table.tableTuple[0].ingredient = new Ingredient(new string[] { "" });
-        table.tableTuple[0].state = initialTuple.state;
+        table.tableTuples = new Tuple[capacity];
+        table.tableTuples[0] = Tuple.CopyTuple(initialTuple.tuple);
 
-        int length = initialTuple.ingredient.ingredientArray.Length;
-        for (int i = 0; i < length; i++)
-        {
-            table.tableTuple[0] = Tuple.CopyTuple(initialTuple.tuple);
-            /*
-            table.tableTuple[0].ingredient.ingredientArray[i] = initialTuple.ingredient.ingredientArray[i];
-            table.tableTuple[0].ingredient.overcookable = initialTuple.ingredient.overcookable;
-            table.tableTuple[0].ingredient.mixeable = initialTuple.ingredient.mixeable;
-            table.tableTuple[0].ingredient.sliceable = initialTuple.ingredient.sliceable;
-            */
-        }
+        table.tableTuples = table.tableTuples.Select(t => t ?? Tuple.None).ToArray();
 
-        if(table is SpawnTable)
+        if (table is SpawnTable)
         {
             SpawnTable spawnTable = (SpawnTable)table;
             spawnTable.spawnRate = spawnRate;
@@ -101,9 +97,9 @@ public class Table : MonoBehaviour
             waitTable.stateTransition = stateTransition;
         }
     }
-
 }
 
+//Sempre que adicionar um tipo de tábua, adicione aqui (não muito escalonável).
 public enum TableType
 {
     Common,

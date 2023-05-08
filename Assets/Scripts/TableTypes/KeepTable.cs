@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TO-DO: Unite no UseTable
+//TO-DO: Unite no UseTable?
 public class KeepTable : TableClass
 {
     public float sliceTime;
@@ -11,7 +11,7 @@ public class KeepTable : TableClass
     public override void UseTable()
     {
         //Três estados: vazio, incompleto e completo
-        if (player.currentTuple == Tuple.None && tableTuple [0] != Tuple.None)
+        if (Player.currentTuple == Tuple.None && tableTuples [0] != Tuple.None)
         {
             StartCoroutine(KeepCoroutine());
         }
@@ -20,13 +20,12 @@ public class KeepTable : TableClass
     IEnumerator KeepCoroutine()
     {
         float timer = 0;
-        while (isCurrent())
+        while (IsCurrent)
         {
             timer += Time.deltaTime;
-            Debug.Log(timer);
             if (timer >= sliceTime)
             {
-                Tuple.ChangeState(tableTuple [0], stateTransition);
+                Tuple.ChangeState(tableTuples [0], stateTransition);
                 SubstituteAdd();
                 yield break;
             }

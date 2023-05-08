@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Scriptables", menuName ="Scriptable Objects/Tuple Scriptable")]
+[CreateAssetMenu(fileName = "Scriptables", menuName ="TupleSO")]
 public class TupleSO : ScriptableObject
 {
     public Ingredient ingredient;

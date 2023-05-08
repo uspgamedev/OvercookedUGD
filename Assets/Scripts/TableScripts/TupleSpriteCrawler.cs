@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class TupleSpriteCrawler : MonoBehaviour
+public class TupleSpriteCrawler
 {
     private const string FOLDER_NAME = "TupleSOs";
 
-    public static Sprite GetTupleSprite(string [] ingredientArray, State state)
+    public Sprite GetTupleSprite(Tuple tuple)
+    {
+        return GetTupleSprite(tuple.ingredient.ingredientArray, tuple.state);
+    }
+    public Sprite GetTupleSprite(string [] ingredientArray, State state)
     {
         TupleSO[] tupleSOs = GetTupleSOs();
+        Debug.Log(tupleSOs.Length);
         foreach(TupleSO tupleSO in tupleSOs)
         {
-            if (tupleSO.ingredient.ingredientArray.SequenceEqual(ingredientArray) && tupleSO.state == state)
+            if (tupleSO.ingredient.ingredientArray.OrderBy(x=>x).SequenceEqual(ingredientArray.OrderBy(x=>x)) && tupleSO.state == state)
             {
                 return tupleSO.tupleSprite;
             }
@@ -21,7 +26,7 @@ public class TupleSpriteCrawler : MonoBehaviour
     }
 
     //Incompleto
-    private static Sprite GetGenericSprite(State state)
+    private Sprite GetGenericSprite(State state)
     {
         switch (state)
         {
@@ -32,7 +37,7 @@ public class TupleSpriteCrawler : MonoBehaviour
         }
     }
 
-    private static TupleSO[] GetTupleSOs()
+    private TupleSO[] GetTupleSOs()
     {
         Object[] objectArray = Resources.LoadAll(FOLDER_NAME, typeof(TupleSO));
 

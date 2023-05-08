@@ -7,7 +7,6 @@ using UnityEditor;
 public class TableEditor : Editor
 {
     SerializedProperty tableTyple;
-    SerializedProperty player;
     SerializedProperty initialTuple;
     SerializedProperty capacity;
 
@@ -20,10 +19,11 @@ public class TableEditor : Editor
     SerializedProperty overcookTime;
     SerializedProperty overcookedState;
 
+    SerializedProperty foodRenderer;
+
     private void OnEnable()
     {
         tableTyple = serializedObject.FindProperty("tableType");
-        player = serializedObject.FindProperty("player");
         initialTuple = serializedObject.FindProperty("initialTuple");
         capacity = serializedObject.FindProperty("capacity");
         spawnRate = serializedObject.FindProperty("spawnRate");
@@ -32,6 +32,7 @@ public class TableEditor : Editor
         boilTime = serializedObject.FindProperty("boilTime");
         overcookTime = serializedObject.FindProperty("overcookTime");
         overcookedState = serializedObject.FindProperty("overcookedState");
+        foodRenderer = serializedObject.FindProperty("foodRenderer");
 
     }
 
@@ -42,12 +43,12 @@ public class TableEditor : Editor
         serializedObject.Update();
 
         EditorGUILayout.PropertyField(tableTyple);
-        EditorGUILayout.PropertyField(player);
         EditorGUILayout.PropertyField(initialTuple);
         EditorGUILayout.PropertyField(capacity);
+        EditorGUILayout.PropertyField(foodRenderer);
 
 
-        if(_table.tableType == TableType.Spawn)
+        if (_table.tableType == TableType.Spawn)
         {
             EditorGUILayout.PropertyField(spawnRate);
         }

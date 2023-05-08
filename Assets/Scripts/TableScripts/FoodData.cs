@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,8 @@ public class Ingredient
 
 	//Bools para checar se já passou por tal estado?
 
-	public static Ingredient None =  new Ingredient { ingredientArray = new string[] { "" }, sliceable = false, mixeable = false, overcookable = false };
+	//Criar um None é mais seguro do que ficar usando null pra checar as coisas. Abaixo, None só tem um get, sem nenhum set.
+	public static Ingredient None { get { return new Ingredient { ingredientArray = new string[] { "" }, sliceable = false, mixeable = false, overcookable = false }; } }
 
 	public Ingredient() { }
 	public Ingredient(string[] array) { ingredientArray = array; }
@@ -29,6 +31,7 @@ public class Ingredient
 		this.mixeable = mixeable;
     }
 
+	//Método que vê os bools acima e decide se, dentro de um Tuple (vide abaixo), o ingrediente pode transicionar pra outro estado
 	public bool CanTrasition(State state)
     {
 		switch (state)
@@ -41,14 +44,32 @@ public class Ingredient
         }
     }
 
+	//Abaixo, umas funções úteis só para não cair em problemas envolvendo referências com arrays
+	public void SetIngredientArray(string[] newArray)
+    {
+		string[] copiedArray = new string[newArray.Length];
+		Array.Copy(newArray, copiedArray, newArray.Length);
+		ingredientArray = copiedArray;
+	}
+
 	public static Ingredient CopyIngredient(Ingredient original)
     {
 		string[] copiedArray = new string[original.ingredientArray.Length];
-		System.Array.Copy(original.ingredientArray, copiedArray, original.ingredientArray.Length);
+		Array.Copy(original.ingredientArray, copiedArray, original.ingredientArray.Length);
 		Ingredient final = new Ingredient(copiedArray, original.overcookable, original.sliceable, original.mixeable);
 		return final;
     }
 
+	public static Ingredient ConcatIngredients(Ingredient merger, Ingredient merged)
+	{ 
+		string[] mergedCopiedArray = new string[merged.ingredientArray.Length];
+		Array.Copy(merged.ingredientArray, mergedCopiedArray, merged.ingredientArray.Length);
+		merger.ingredientArray = merger.ingredientArray.Concat(mergedCopiedArray).ToArray();
+		Ingredient result = CopyIngredient(merger);
+		return result;
+	}
+
+	//Overrides para igualdades
     #region Overrides
     public override bool Equals(object obj)
     {
@@ -57,7 +78,7 @@ public class Ingredient
 			return false;
         }
 		Ingredient other = (Ingredient)obj;
-		bool condition = ingredientArray.OrderBy(x=>x).SequenceEqual(other.ingredientArray.OrderBy(x=>x))
+		bool condition = ingredientArray.OrderBy(x => x).SequenceEqual(other.ingredientArray.OrderBy(x => x))
 			 && sliceable==other.sliceable && mixeable==other.mixeable && overcookable==other.overcookable;
 
 		return condition;
@@ -78,7 +99,7 @@ public class Ingredient
 	#endregion
 }
 
-//Enums n são escalonáveis
+//Enums não são escalonáveis
 public enum State
 {
 	None,
@@ -95,6 +116,8 @@ public class Tuple
 
 	public Sprite sprite;
 
+	public static Tuple None { get { return new Tuple(Ingredient.None, State.None, null); } }
+
 	public Tuple()
     {
 		ingredient = new Ingredient();
@@ -104,7 +127,6 @@ public class Tuple
 		ingredient = ing;
 		state = stt;
 	}
-
 	public Tuple (Ingredient ing, State stt, Sprite spt)
     {
 		ingredient = ing;
@@ -112,8 +134,7 @@ public class Tuple
 		sprite = spt;
     }
 
-	public static Tuple None = new Tuple(Ingredient.None, State.None);
-
+	//O método abaixo é um tanto desnecessário enquanto tudo for público
 	public static Ingredient GetIngredient(Tuple tuple)
 	{
 		return tuple.ingredient;
