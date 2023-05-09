@@ -1563,9 +1563,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tableType: 0
   initialTuple: {fileID: 11400000, guid: d271c17c5534e254482db5a223bfaab9, type: 2}
-  player: {fileID: 1715431764}
   capacity: 1
   spawnRate: 0
+  foodRenderer: {fileID: 0}
   sliceTime: 0
   stateTransition: 0
   boilTime: 0
@@ -4962,9 +4962,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tableType: 0
   initialTuple: {fileID: 11400000, guid: b5830fc92fe1b7f409ba5e1f391a1b0b, type: 2}
-  player: {fileID: 1715431764}
   capacity: 1
   spawnRate: 0
+  foodRenderer: {fileID: 0}
   sliceTime: 0
   stateTransition: 0
   boilTime: 0
@@ -5123,8 +5123,8 @@ GameObject:
   - component: {fileID: 1715431758}
   - component: {fileID: 1715431757}
   - component: {fileID: 1715431762}
-  - component: {fileID: 1715431763}
   - component: {fileID: 1715431764}
+  - component: {fileID: 1715431763}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player

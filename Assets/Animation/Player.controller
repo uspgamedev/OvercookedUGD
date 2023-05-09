@@ -40,8 +40,8 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: SpeedHorizontal
     m_Mirror: 0
-  m_BlendParameter: SpeedHorizontal
-  m_BlendParameterY: SpeedVertical
+  m_BlendParameter: LastMoveX
+  m_BlendParameterY: LastMoveY
   m_MinThreshold: 0
   m_MaxThreshold: 3
   m_UseAutomaticThresholds: 0
@@ -299,6 +299,18 @@ AnimatorController:
     m_DefaultBool: 0
     m_Controller: {fileID: 0}
   - m_Name: SpeedVertical
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: LastMoveX
+    m_Type: 1
+    m_DefaultFloat: 0
+    m_DefaultInt: 0
+    m_DefaultBool: 0
+    m_Controller: {fileID: 0}
+  - m_Name: LastMoveY
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
