@@ -7,13 +7,16 @@ public class OrdersUI : MonoBehaviour
     [SerializeField] private Transform list;
     [SerializeField] private Transform orderTemplate;
 
+    private int i = 0;
+
+    private float maxTime = 15f;
+
     private void Start(){
         OrdersManager.Instance.ReceivedOrder += OrdersManager_ReceivedOrder;
-
-        UpdateVisual();
     }
 
     private void OrdersManager_ReceivedOrder(object sender, System.EventArgs e){
+        i++;
         UpdateVisual();
     }
 
@@ -22,15 +25,14 @@ public class OrdersUI : MonoBehaviour
     }
 
     private void UpdateVisual(){
-        foreach (Transform order in list){
-            if(order == orderTemplate) continue;
-            else Destroy(order.gameObject);
-        }
 
-        foreach(OrderSO order in OrdersManager.Instance.GetOrderList()){
-            Transform orderCard = Instantiate(orderTemplate, list);
-            orderCard.gameObject.SetActive(true);
-            orderCard.GetComponent<OrderRecipeUI>().Name(order);
-        }
+        Transform orderCard = Instantiate(orderTemplate, list);
+        orderCard.name = "Order" + i;
+        orderCard.gameObject.SetActive(true);
+        OrderSO order = OrdersManager.Instance.GetOrderList()[OrdersManager.Instance.GetOrderList().Count - 1];
+        OrderRecipeUI orderRUI = orderCard.GetComponent<OrderRecipeUI>();
+        orderRUI.SetTimer(maxTime * (1 + OrdersManager.Instance.GetOrderList().Count));
+        orderRUI.Name(order);
+        
     }
 }

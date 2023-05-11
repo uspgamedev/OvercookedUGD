@@ -14,12 +14,26 @@ public class OrdersManager : MonoBehaviour
     private float timer = 4f;
     private int maxRecipes = 5;
 
+    private float maxTime = 15f;
+
     private List<OrderSO> orderList;
 
     private void Awake(){
         Instance = this;
 
         orderList = new List<OrderSO>();
+    }
+
+    private void Start(){
+        OrderRecipeUI.Instance.timedOut += OrderRecipeUI_TimedOut;
+    }
+
+    private void OrderRecipeUI_TimedOut(object sender, System.EventArgs e){
+        Debug.Log("Morri");
+        /*Debug.Log(orderList[0]);
+        Debug.Log(orderList);*/
+        orderList.Remove(orderList[0]);
+        //Debug.Log(orderList);
     }
 
     void Update(){
