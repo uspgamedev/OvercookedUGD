@@ -132,8 +132,7 @@ MonoBehaviour:
   recipeName: {fileID: 4149923164813955061}
   list: {fileID: 4149923166619161284}
   ingredientTemplate: {fileID: 4149923166334699497}
-  maxTimer: 0
-  bar: {fileID: 2274595987839148130}
+  thisOrder: {fileID: 0}
 --- !u!1 &4149923164813955067
 GameObject:
   m_ObjectHideFlags: 0

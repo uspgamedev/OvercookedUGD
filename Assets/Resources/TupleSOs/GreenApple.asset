@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af4c2e4859e54224881ad94ee1dba1d6, type: 3}
-  m_Name: Apple
+  m_Name: GreenApple
   m_EditorClassIdentifier: 
   ingredient:
     ingredientArray:
-    - Apple
-    overcookeable: 1
+    - GreenApple
+    overcookable: 1
     sliceable: 1
     mixeable: 1
   state: 0
+  tupleSprite: {fileID: 21300000, guid: 0bc1b6ecc2b88394aa74450433661b92, type: 3}

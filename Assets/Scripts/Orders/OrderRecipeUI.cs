@@ -8,16 +8,21 @@ using System;
 public class OrderRecipeUI : MonoBehaviour
 {
 
-    public event EventHandler timedOut;
     [SerializeField] private TextMeshProUGUI recipeName;
     [SerializeField] private Transform list;
     [SerializeField] private Transform ingredientTemplate;
+
+    [SerializeField] private GameObject manager;
+
+    public OrderSO thisOrder;
     
     private float maxTimer;
 
     private float currentTimer;
 
-    [SerializeField] private GameObject bar;
+    List<OrderSO> currentList;
+
+    //[SerializeField] private GameObject bar;
 
     public static OrderRecipeUI Instance { get; private set;}
 
@@ -25,30 +30,34 @@ public class OrderRecipeUI : MonoBehaviour
     private void Awake(){
         Instance = this;
         ingredientTemplate.gameObject.SetActive(false);
+        currentList = manager.GetComponent<OrdersManager>().orderList;
     }
 
     public void Name(OrderSO order){
         recipeName.text = order.dishName;
+        thisOrder = order;
 
         foreach(Transform ingredient in list){
             if(ingredient == ingredientTemplate) continue;
             else Destroy(ingredient.gameObject);
         }
 
-        foreach(IngredientSO ingredient in order.dishRecipe){
+        foreach(TupleSO ingredient in order.dishAux){
             Transform ingredientIcon = Instantiate(ingredientTemplate, list);
             ingredientIcon.gameObject.SetActive(true);
-            ingredientIcon.GetComponent<Image>().sprite = ingredient.icon;
+            ingredientIcon.GetComponent<Image>().sprite = ingredient.tupleSprite;
         }
     }
 
     private void Update(){
+
         if(currentTimer > 0){
             currentTimer = currentTimer - Time.deltaTime;
-            bar.GetComponent<Image>().fillAmount = currentTimer/maxTimer;
+            //bar.GetComponent<Image>().fillAmount = currentTimer/maxTimer;
+            this.gameObject.transform.GetChild(3).GetComponent<Image>().fillAmount = currentTimer/maxTimer;
         }
         else{
-            timedOut?.Invoke(this, EventArgs.Empty);
+            currentList.Remove(currentList[0]);
             Destroy(this.gameObject);
         }
     }

@@ -14,7 +14,6 @@ public class TupleSpriteCrawler
     public Sprite GetTupleSprite(string [] ingredientArray, State state)
     {
         TupleSO[] tupleSOs = GetTupleSOs();
-        Debug.Log(tupleSOs.Length);
         foreach(TupleSO tupleSO in tupleSOs)
         {
             if (tupleSO.ingredient.ingredientArray.OrderBy(x=>x).SequenceEqual(ingredientArray.OrderBy(x=>x)) && tupleSO.state == state)

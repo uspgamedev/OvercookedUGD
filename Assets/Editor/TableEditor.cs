@@ -21,6 +21,8 @@ public class TableEditor : Editor
 
     SerializedProperty foodRenderer;
 
+    SerializedProperty orderList;
+
     private void OnEnable()
     {
         tableTyple = serializedObject.FindProperty("tableType");
@@ -33,6 +35,7 @@ public class TableEditor : Editor
         overcookTime = serializedObject.FindProperty("overcookTime");
         overcookedState = serializedObject.FindProperty("overcookedState");
         foodRenderer = serializedObject.FindProperty("foodRenderer");
+        orderList = serializedObject.FindProperty("orderList");
 
     }
 
@@ -63,6 +66,9 @@ public class TableEditor : Editor
             EditorGUILayout.PropertyField(overcookTime);
             EditorGUILayout.PropertyField(stateTransition);
             EditorGUILayout.PropertyField(overcookedState);
+        }
+        if(_table.tableType == TableType.Final){
+            EditorGUILayout.PropertyField(orderList);
         }
 
 

@@ -3,10 +3,10 @@ using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
 
-//TO-DO: fazer os sprites necessários aparecerem a depender do ingrediente
+//TO-DO: fazer os sprites necessï¿½rios aparecerem a depender do ingrediente
 //TO-DO: deixar a troca de ingredientes mais conveniente
 
-//Essa classe abstrata define as informações gerais das tábuas e alguns métodos básicos de interação. Implementações concretas podem ser encontradas na pasta TableTypes
+//Essa classe abstrata define as informaï¿½ï¿½es gerais das tï¿½buas e alguns mï¿½todos bï¿½sicos de interaï¿½ï¿½o. Implementaï¿½ï¿½es concretas podem ser encontradas na pasta TableTypes
 public abstract class TableClass : MonoBehaviour
 {
     public Tuple[] tableTuples;
@@ -30,14 +30,14 @@ public abstract class TableClass : MonoBehaviour
     {
         if (SubstitutionPossible)
         {
-            //Subsituição simples
+            //Subsituiï¿½ï¿½o simples
             Tuple tuple = tableTuples[0];
             tableTuples[0] = Player.currentTuple;
             Player.currentTuple = tuple;
         }
         else if (AdditionPossible)
         {
-            //Adição a uma tábua que pode conter várias tuples
+            //Adiï¿½ï¿½o a uma tï¿½bua que pode conter vï¿½rias tuples
             Tuple firstNonNull = tableTuples.FirstOrDefault(t => t == Tuple.None);
             int index = System.Array.IndexOf(tableTuples, firstNonNull);
             tableTuples[index] = Player.currentTuple;
@@ -49,7 +49,7 @@ public abstract class TableClass : MonoBehaviour
 
     protected void Unite()
     {
-        //Une todas as tuples numa mistura única
+        //Une todas as tuples numa mistura ï¿½nica
         for (int i = 1; i < capacity; i++)
         {
             if (tableTuples[i] != Tuple.None)
@@ -66,6 +66,12 @@ public abstract class TableClass : MonoBehaviour
     public void PaintTable()
     {
         foodRenderer.sprite = tableTuples[0].sprite;
+    }
+
+    protected void ClearTable(){
+        for(int i = 0; i < capacity; i++){
+            tableTuples[i] = Tuple.None;
+        }
     }
 }
 

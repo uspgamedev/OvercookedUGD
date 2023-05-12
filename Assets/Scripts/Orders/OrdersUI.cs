@@ -9,7 +9,7 @@ public class OrdersUI : MonoBehaviour
 
     private int i = 0;
 
-    private float maxTime = 15f;
+    private float maxTime = 10f;
 
     private void Start(){
         OrdersManager.Instance.ReceivedOrder += OrdersManager_ReceivedOrder;
@@ -31,7 +31,7 @@ public class OrdersUI : MonoBehaviour
         orderCard.gameObject.SetActive(true);
         OrderSO order = OrdersManager.Instance.GetOrderList()[OrdersManager.Instance.GetOrderList().Count - 1];
         OrderRecipeUI orderRUI = orderCard.GetComponent<OrderRecipeUI>();
-        orderRUI.SetTimer(maxTime * (1 + OrdersManager.Instance.GetOrderList().Count));
+        orderRUI.SetTimer(maxTime * (OrdersManager.Instance.GetOrderList().Count));
         orderRUI.Name(order);
         
     }

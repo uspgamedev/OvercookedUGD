@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af4c2e4859e54224881ad94ee1dba1d6, type: 3}
-  m_Name: None
+  m_Name: RedApple
   m_EditorClassIdentifier: 
   ingredient:
     ingredientArray:
-    - 
-    overcookeable: 0
-    sliceable: 0
-    mixeable: 0
+    - RedApple
+    overcookable: 1
+    sliceable: 1
+    mixeable: 1
   state: 0
+  tupleSprite: {fileID: 21300000, guid: 7a69b5e795692f74cb480c51ea6c7ee8, type: 3}

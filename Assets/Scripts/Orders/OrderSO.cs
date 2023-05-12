@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "OrderSO", menuName = "ScriptableObjects/OrderSO")]
 public class OrderSO : ScriptableObject {
     
-    public List<IngredientSO> dishRecipe;
+    public Ingredient dishRecipe;
+    public List<TupleSO> dishAux;
 
     public string dishName;
 }

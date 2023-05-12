@@ -10,9 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 105f888127f2fd841aa3d03e923a7aa2, type: 3}
-  m_Name: AppleSalad
+  m_Name: _JustGreenApple
   m_EditorClassIdentifier: 
   dishRecipe:
-  - {fileID: 11400000, guid: 7774ed983546e1848935a69d5d5c8982, type: 2}
-  - {fileID: 11400000, guid: a4075339d23fe544796f7877f65936a5, type: 2}
-  dishName: Apple Salad
+    ingredientArray:
+    - GreenApple
+    - GreenApple
+    overcookable: 1
+    sliceable: 1
+    mixeable: 0
+  dishAux:
+  - {fileID: 11400000, guid: 194a0d2065fab304986bc7a04806b5e6, type: 2}
+  - {fileID: 11400000, guid: 194a0d2065fab304986bc7a04806b5e6, type: 2}
+  dishName: Just Green Apple

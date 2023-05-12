@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-//Essa classe é responsável por inicializar as tábuas. Ela serve de intermediária entre TableClass e TableEditor, que possibilita um custom inspector pras tábuas
+//Essa classe ï¿½ responsï¿½vel por inicializar as tï¿½buas. Ela serve de intermediï¿½ria entre TableClass e TableEditor, que possibilita um custom inspector pras tï¿½buas
 //no inspector.
 public class Table : MonoBehaviour
 {
@@ -12,6 +12,8 @@ public class Table : MonoBehaviour
     public int capacity = 1;
 
     public float spawnRate;
+
+    [SerializeField] private Transform orderList;
 
     [SerializeField] SpriteRenderer foodRenderer;
 
@@ -26,7 +28,7 @@ public class Table : MonoBehaviour
 
     private void Awake()
     {
-        //Inicializa a tábua
+        //Inicializa a tï¿½bua
         GenerateTable();
     }
 
@@ -69,7 +71,7 @@ public class Table : MonoBehaviour
     
     private void CopyValues(TableClass table)
     {
-        //Inicializa a tábua a partir do TupleSO fornecido
+        //Inicializa a tï¿½bua a partir do TupleSO fornecido
         table.capacity = capacity;
 
         table.tableTuples = new Tuple[capacity];
@@ -96,10 +98,14 @@ public class Table : MonoBehaviour
             waitTable.overcookedState = overcookedState;
             waitTable.stateTransition = stateTransition;
         }
+        else if(table is FinalTable){
+            FinalTable finalTable = (FinalTable)table;
+            finalTable.orderList = orderList;
+        }
     }
 }
 
-//Sempre que adicionar um tipo de tábua, adicione aqui (não muito escalonável).
+//Sempre que adicionar um tipo de tï¿½bua, adicione aqui (nï¿½o muito escalonï¿½vel).
 public enum TableType
 {
     Common,
