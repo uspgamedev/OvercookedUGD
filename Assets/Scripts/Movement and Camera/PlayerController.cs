@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
 
     Vector2 movement;
-
+    private Vector3 _facingDirection = -Vector3.up;
     //Tables
     [SerializeField] LayerMask tableLayer;    
     //Tuples
@@ -36,6 +36,7 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
             animator.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
+            SetFacingDirection(movement.x, movement.y);
         }
 
         if (Input.GetKeyDown(KeyCode.X) && CheckTable())
@@ -56,25 +57,18 @@ public class PlayerController : MonoBehaviour
 
     public bool CheckTable()
     {
-        //transform.up é só temporário
-        return Physics2D.Raycast(transform.position, transform.position + transform.up, tableLayer);
+        return Physics2D.Raycast(transform.position, transform.position + _facingDirection, tableLayer);
     }
 
     public Table GetTable()
     {
         //Talvez tanto null acabe gerando bugs imprevistos
-        //transform.up é só temporário
-        Vector3 ray = transform.up;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, ray, tableLayer);
-        if (Physics2D.Raycast(transform.position, ray, tableLayer))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _facingDirection, tableLayer);
+        if (Physics2D.Raycast(transform.position, _facingDirection, tableLayer))
         {
-            Debug.Log("k1");
-            Debug.Log("Raycast: " + hit.collider.gameObject);
             if (hit.transform.GetComponent<Table>() != null)
-            {
-                Debug.Log("k2");
                 return hit.transform.GetComponent<Table>();
-            }
+            
             else
                 return null;
         }
@@ -82,9 +76,18 @@ public class PlayerController : MonoBehaviour
             return null;
     }
 
+    private void SetFacingDirection(float horizontalMovement, float verticalMovement)
+    {
+        if (Mathf.Abs(verticalMovement) > 0.1f)
+            _facingDirection = Mathf.Sign(verticalMovement) * Vector3.up;
+        
+        else if (Mathf.Abs(horizontalMovement) > 0.1f) 
+            _facingDirection = Mathf.Sign(horizontalMovement) * Vector3.right;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawRay(new Ray(transform.position, transform.up));
+        Gizmos.DrawRay(new Ray(transform.position, _facingDirection));
     }
 }
