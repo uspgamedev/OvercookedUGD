@@ -9,7 +9,7 @@ public class OrdersUI : MonoBehaviour
 
     private int i = 0;
 
-    private float maxTime = 10f;
+    private float maxTime = 20f;
 
     private void Start(){
         OrdersManager.Instance.ReceivedOrder += OrdersManager_ReceivedOrder;
