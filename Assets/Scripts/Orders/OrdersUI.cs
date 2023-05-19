@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class OrdersUI : MonoBehaviour
 {
@@ -31,6 +32,7 @@ public class OrdersUI : MonoBehaviour
         orderCard.gameObject.SetActive(true);
         OrderSO order = OrdersManager.Instance.GetOrderList()[OrdersManager.Instance.GetOrderList().Count - 1];
         OrderRecipeUI orderRUI = orderCard.GetComponent<OrderRecipeUI>();
+        orderRUI.GetComponent<CanvasGroup>().DOFade(1,1f).SetEase(Ease.InCubic);
         orderRUI.SetTimer(maxTime * (OrdersManager.Instance.GetOrderList().Count));
         orderRUI.Name(order);
         
