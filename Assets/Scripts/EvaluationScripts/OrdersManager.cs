@@ -26,9 +26,9 @@ public class OrdersManager : MonoBehaviour
         FinalTable.Instance.deliveredOrder += FinalTable_DeliveredOrder;
     }
 
-    private void FinalTable_DeliveredOrder(object sender, System.EventArgs e){
+    private void FinalTable_DeliveredOrder(object sender, FinalTable.DeliveredOrderEventArgs e){
         Debug.Log("Entregue");
-        orderList.Remove(orderList[0]);
+        orderList.Remove(orderList[e.index]);
     }
 
 
