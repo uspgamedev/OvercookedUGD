@@ -9,4 +9,6 @@ public class OrderSO : ScriptableObject {
     public List<TupleSO> dishAux;
 
     public string dishName;
+
+    public int value;
 }

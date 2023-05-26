@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class OrdersManager : MonoBehaviour
 {
@@ -10,6 +11,11 @@ public class OrdersManager : MonoBehaviour
     public static OrdersManager Instance { get; private set;}
 
     [SerializeField] private RecipeListSO availableOrders;
+
+    [SerializeField] private Image score;
+
+    private float maxScore;
+    private float currentScore;
 
     private float timer = 4f;
     private int maxRecipes = 5;
@@ -24,11 +30,15 @@ public class OrdersManager : MonoBehaviour
 
     private void Start(){
         FinalTable.Instance.deliveredOrder += FinalTable_DeliveredOrder;
+        maxScore = 20;
+        currentScore = 0;
     }
 
     private void FinalTable_DeliveredOrder(object sender, FinalTable.DeliveredOrderEventArgs e){
         Debug.Log("Entregue");
         orderList.Remove(orderList[e.index]);
+        currentScore = currentScore + e.points;
+        score.fillAmount = currentScore / maxScore;
     }
 
 

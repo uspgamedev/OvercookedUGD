@@ -15,6 +15,8 @@ public class OrderRecipeUI : MonoBehaviour
     [SerializeField] private GameObject manager;
 
     public OrderSO thisOrder;
+
+    public int points;
     
     private float maxTimer;
 
@@ -36,6 +38,7 @@ public class OrderRecipeUI : MonoBehaviour
     public void Name(OrderSO order){
         recipeName.text = order.dishName;
         thisOrder = order;
+        points = order.value;
 
         foreach(Transform ingredient in list){
             if(ingredient == ingredientTemplate) continue;

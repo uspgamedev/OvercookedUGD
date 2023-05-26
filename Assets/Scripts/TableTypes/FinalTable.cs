@@ -12,6 +12,7 @@ public class FinalTable : TableClass
     public event EventHandler<DeliveredOrderEventArgs> deliveredOrder;
     public class DeliveredOrderEventArgs : EventArgs{
         public int index;
+        public int points;
     }
 
     private int i;
@@ -29,7 +30,7 @@ public class FinalTable : TableClass
         i = 0;
         foreach(OrderRecipeUI order in orders){
             if(tableTuples[0].ingredient == order.thisOrder.dishRecipe){
-                deliveredOrder?.Invoke(this, new DeliveredOrderEventArgs { index = i });
+                deliveredOrder?.Invoke(this, new DeliveredOrderEventArgs { index = i, points = order.points });
                 order.gameObject.GetComponent<Transform>().DOPunchPosition(new Vector3(-10f, 0f, 0f), 2f);
                 Destroy(order.gameObject);
                 ClearTable();
