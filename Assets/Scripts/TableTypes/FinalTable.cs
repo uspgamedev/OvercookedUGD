@@ -9,7 +9,12 @@ public class FinalTable : TableClass
 
     [SerializeField] public Transform orderList;
 
-    public event EventHandler deliveredOrder;
+    public event EventHandler<DeliveredOrderEventArgs> deliveredOrder;
+    public class DeliveredOrderEventArgs : EventArgs{
+        public int index;
+    }
+
+    private int i;
 
     public static FinalTable Instance { get; private set;}
 
@@ -21,15 +26,17 @@ public class FinalTable : TableClass
 
         OrderRecipeUI[] orders = orderList.GetComponentsInChildren<OrderRecipeUI>();
         bool delivered = false;
+        i = 0;
         foreach(OrderRecipeUI order in orders){
             if(tableTuples[0].ingredient == order.thisOrder.dishRecipe){
-                deliveredOrder?.Invoke(this, EventArgs.Empty);
+                deliveredOrder?.Invoke(this, new DeliveredOrderEventArgs { index = i });
                 order.gameObject.GetComponent<Transform>().DOPunchPosition(new Vector3(-10f, 0f, 0f), 2f);
                 Destroy(order.gameObject);
                 ClearTable();
                 delivered = true;
                 break;
             }
+            i++;
         }
         if(!delivered){
             ClearTable();
