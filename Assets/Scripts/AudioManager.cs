@@ -47,4 +47,10 @@ public class AudioManager : MonoBehaviour
         }
         s.source.Play();
     }
+
+    public void Pause(){
+        foreach(Sound s in Sounds){
+            s.source.Pause();
+        }
+    }
 }

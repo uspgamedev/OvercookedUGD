@@ -31,6 +31,7 @@ public class FinalTable : TableClass
         if (orderedIngredients.Contains(tableTuples[0].ingredient))
         {
             OrderRecipeUI order = orders[orderedIngredients.IndexOf(tableTuples[0].ingredient)];
+            order.End();
             deliveredOrder?.Invoke(this, new DeliveredOrderEventArgs
             {
                 index = orderedIngredients.IndexOf(tableTuples[0].ingredient),

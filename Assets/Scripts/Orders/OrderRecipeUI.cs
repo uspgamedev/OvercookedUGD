@@ -17,6 +17,8 @@ public class OrderRecipeUI : MonoBehaviour
     public OrderSO thisOrder;
 
     public int points;
+
+    private bool done;
     
     private float maxTimer;
 
@@ -33,6 +35,7 @@ public class OrderRecipeUI : MonoBehaviour
         Instance = this;
         ingredientTemplate.gameObject.SetActive(false);
         currentList = manager.GetComponent<OrdersManager>().orderList;
+        done = false;
     }
 
     public void Name(OrderSO order){
@@ -53,21 +56,26 @@ public class OrderRecipeUI : MonoBehaviour
     }
 
     private void Update(){
-
-        if(currentTimer > 0){
-            currentTimer = currentTimer - Time.deltaTime;
-            //bar.GetComponent<Image>().fillAmount = currentTimer/maxTimer;
-            this.gameObject.transform.GetChild(3).GetComponent<Image>().fillAmount = currentTimer/maxTimer;
-        }
-        else{
-            currentList.Remove(currentList[0]);
-            Destroy(this.gameObject);
+        if(!done){
+            if(currentTimer > 0){
+                currentTimer = currentTimer - Time.deltaTime;
+                //bar.GetComponent<Image>().fillAmount = currentTimer/maxTimer;
+                this.gameObject.transform.GetChild(3).GetComponent<Image>().fillAmount = currentTimer/maxTimer;
+            }
+            else{
+                currentList.Remove(currentList[0]);
+                Destroy(this.gameObject);
+            }
         }
     }
 
     public void SetTimer(float t){
         maxTimer = t;
         currentTimer = t;
+    }
+
+    public void End(){
+        done = true;
     }
 
 }
