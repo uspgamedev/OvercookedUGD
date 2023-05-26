@@ -32,7 +32,7 @@ public class OrdersUI : MonoBehaviour
         orderCard.gameObject.SetActive(true);
         OrderSO order = OrdersManager.Instance.GetOrderList()[OrdersManager.Instance.GetOrderList().Count - 1];
         OrderRecipeUI orderRUI = orderCard.GetComponent<OrderRecipeUI>();
-        orderRUI.GetComponent<CanvasGroup>().DOFade(1,1f).SetEase(Ease.InCubic);
+        orderRUI.GetComponent<CanvasGroup>().DOFade(1,GameEasings.OrderCardFadeDuration).SetEase(GameEasings.OrderCardFadeEase);
         orderRUI.SetTimer(maxTime * (OrdersManager.Instance.GetOrderList().Count));
         orderRUI.Name(order);
         

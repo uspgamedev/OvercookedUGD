@@ -22,7 +22,7 @@ public class OrderRecipeUI : MonoBehaviour
 
     private float currentTimer;
 
-    List<OrderSO> currentList;
+    public List<OrderSO> currentList;
 
     //[SerializeField] private GameObject bar;
 

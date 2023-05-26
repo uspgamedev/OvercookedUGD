@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using System;
 using DG.Tweening;
@@ -15,44 +16,50 @@ public class FinalTable : TableClass
         public int points;
     }
 
-    private int i;
-
     public static FinalTable Instance { get; private set;}
 
     public void Awake(){
         Instance = this;
     }
-    
-    public override void UseTable() {
+
+    public override void SubstituteAdd()
+    {
+        base.SubstituteAdd();
 
         OrderRecipeUI[] orders = orderList.GetComponentsInChildren<OrderRecipeUI>();
-        bool delivered = false;
-        i = 0;
-        foreach(OrderRecipeUI order in orders){
-            if(tableTuples[0].ingredient == order.thisOrder.dishRecipe){
-                deliveredOrder?.Invoke(this, new DeliveredOrderEventArgs { index = i, points = order.points });
-                order.gameObject.GetComponent<Transform>().DOPunchPosition(new Vector3(-10f, 0f, 0f), 2f);
-                Destroy(order.gameObject);
-                ClearTable();
-                delivered = true;
-                break;
-            }
-            i++;
+        List<Ingredient> orderedIngredients = orderList.GetChild(1).GetComponent<OrderRecipeUI>().currentList.Select(order => order.dishRecipe).ToList();
+        if (orderedIngredients.Contains(tableTuples[0].ingredient))
+        {
+            OrderRecipeUI order = orders[orderedIngredients.IndexOf(tableTuples[0].ingredient)];
+            deliveredOrder?.Invoke(this, new DeliveredOrderEventArgs
+            {
+                index = orderedIngredients.IndexOf(tableTuples[0].ingredient),
+                points = order.points
+            });
+            order.gameObject.GetComponent<Transform>().DOPunchPosition(GameEasings.FinalTablePunchVector, GameEasings.FinalTablePunchDuration).OnComplete(()=>
+            Destroy(order.gameObject));
+            
         }
-        if(!delivered){
-            ClearTable();
+        else
+        {
             Debug.Log("Errado");
         }
-        /*if(tableTuples[0].ingredient == orderList.GetChild(1).GetComponent<OrderRecipeUI>().thisOrder.dishRecipe){
-            deliveredOrder?.Invoke(this, EventArgs.Empty);
-            orderList.GetChild(1).gameObject.GetComponent<Transform>().DOPunchPosition(new Vector3(-10f, 0f, 0f), 2f);
-            Destroy(orderList.GetChild(1).gameObject);
-            ClearTable();
-        }
-        else{
-            ClearTable();
-            Debug.Log("Errado");
-        }*/
+
+        PlayFadeAnimation();
     }
-    
+
+    public override void UseTable() {}
+
+    private void PlayFadeAnimation()
+    {
+        PaintTable();
+        Vector3 originalScale = foodRenderer.transform.localScale;
+        foodRenderer.transform.DOScale(Vector3.zero, GameEasings.FinalTableFadeDuration).SetEase(GameEasings.FinalTableFadeEase).OnComplete(() =>
+        {
+            ClearTable();
+            foodRenderer.transform.localScale = originalScale;
+            PaintTable();
+        });
+    }
+
 }

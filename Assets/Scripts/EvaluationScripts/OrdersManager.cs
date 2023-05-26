@@ -52,7 +52,6 @@ public class OrdersManager : MonoBehaviour
                 OrderSO order = availableOrders.possibleOrders[UnityEngine.Random.Range(0, availableOrders.possibleOrders.Count)];
 
                 orderList.Add(order);
-                Debug.Log(order);
                 ReceivedOrder?.Invoke(this, EventArgs.Empty);
             }
         }

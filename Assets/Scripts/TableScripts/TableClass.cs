@@ -26,7 +26,7 @@ public abstract class TableClass : MonoBehaviour
 
     public abstract void UseTable();
 
-    public void SubstituteAdd()
+    public virtual void SubstituteAdd()
     {
         if (SubstitutionPossible)
         {
@@ -44,6 +44,7 @@ public abstract class TableClass : MonoBehaviour
 
             Player.currentTuple = Tuple.None;
         }
+        OrderTuples();
         PaintTable();
     }
 
@@ -66,6 +67,20 @@ public abstract class TableClass : MonoBehaviour
     public void PaintTable()
     {
         foodRenderer.sprite = tableTuples[0].sprite;
+    }
+
+    protected void OrderTuples()
+    {
+        int loopLength = capacity;
+        while (loopLength > 0 && tableTuples[0] == Tuple.None) 
+        {
+            for (int i = 0; i < tableTuples.Count() - 1; i++)
+            {
+                tableTuples[i] = tableTuples[i + 1];
+            }
+            tableTuples[tableTuples.Count() - 1] = Tuple.None;
+            loopLength -= 1;
+        }
     }
 
     protected void ClearTable(){

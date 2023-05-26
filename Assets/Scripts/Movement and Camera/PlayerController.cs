@@ -57,7 +57,7 @@ public class PlayerController : MonoBehaviour
 
     public bool CheckTable()
     {
-        return Physics2D.Raycast(transform.position, transform.position + _facingDirection, tableLayer);
+        return Physics2D.Raycast(transform.position, _facingDirection, tableLayer);
     }
 
     public Table GetTable()
