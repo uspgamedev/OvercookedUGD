@@ -15,6 +15,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private Image FinalScore;
 
+    [Header("Food sprites")]
+    public Sprite genericFood;
+
     private void Awake()
     {
         if(Instance != null && Instance != this)
@@ -24,6 +27,7 @@ public class GameManager : MonoBehaviour
         else
         {
             Instance = this;
+            DontDestroyOnLoad(this);
         }
     }
 

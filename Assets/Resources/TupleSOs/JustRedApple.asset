@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: JustRedApple
   m_EditorClassIdentifier: 
   ingredient:
-    ingredientArray: []
-    overcookable: 0
-    sliceable: 0
+    ingredientArray:
+    - RedApple
+    - RedApple
+    overcookable: 1
+    sliceable: 1
     mixeable: 0
-  state: 0
-  tupleSprite: {fileID: 0}
+  state: 2
+  tupleSprite: {fileID: 21300000, guid: 1050d62f2e33b4549b441104b9ed6bf4, type: 3}

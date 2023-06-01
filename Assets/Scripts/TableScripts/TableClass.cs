@@ -15,14 +15,23 @@ public abstract class TableClass : MonoBehaviour
     public SpriteRenderer foodRenderer;
 
     //Crawler para procurar os sprites de misturas dentro da pasta Resources\TupleSOs
-    private TupleSpriteCrawler crawler = new TupleSpriteCrawler();
+    private TupleSpriteCrawler _crawler = new TupleSpriteCrawler();
 
     public PlayerController Player => GameManager.Instance.player.GetComponent<PlayerController>();
-    protected bool IsCurrent { get { return Player.CheckTable() && Player.GetTable().gameObject == gameObject; } }
-    protected int Amount { get { return tableTuples.Where(t => t != null).Count(t => t != Tuple.None); } }
-    protected bool SubstitutionPossible { get { return Player.currentTuple == Tuple.None || tableTuples[0] == Tuple.None; } }
-    protected bool AdditionPossible { get { return Player.currentTuple != Tuple.None && tableTuples[0] != Tuple.None && Amount < capacity; } }
-
+    protected bool IsCurrent => (Player.CheckTable() && Player.GetTable().gameObject == gameObject);
+    protected int Amount => tableTuples.Where(t => t != null).Count(t => t != Tuple.None);
+    protected bool SubstitutionPossible => (Player.currentTuple == Tuple.None || tableTuples[0] == Tuple.None);
+    protected bool AdditionPossible => (Player.currentTuple != Tuple.None && tableTuples[0] != Tuple.None && Amount < capacity);
+    private IngredientsDisplayUI DisplayUI
+    {
+        get
+        {
+            IngredientsDisplayUI manyUI = GetComponent<IngredientsDisplayUI>();
+            if (manyUI == null || manyUI.imagesList.Count != capacity - 1)
+                throw new System.Exception("Table UI images count not equal to capacity: IngredientsDisplayUI component might be missing or not correctly setup.");
+            return manyUI;
+        }
+    }
 
     public abstract void UseTable();
 
@@ -60,19 +69,24 @@ public abstract class TableClass : MonoBehaviour
             }
         }
         //Crawler procura pelo sprite
-        tableTuples[0].sprite = crawler.GetTupleSprite(tableTuples[0]);
-        PaintTable();
+    }
+
+    protected void SetFirstSpriteWithCrawler()
+    {
+        tableTuples[0].sprite = _crawler.GetTupleSprite(tableTuples[0]);
     }
 
     public void PaintTable()
     {
         foodRenderer.sprite = tableTuples[0].sprite;
+        DisplayUI.SetDisplays(tableTuples);
     }
 
     protected void OrderTuples()
     {
+        /*
         int loopLength = capacity;
-        while (loopLength > 0 && tableTuples[0] == Tuple.None) 
+        while (loopLength > 0 && tableTuples[0] == Tuple.None)
         {
             for (int i = 0; i < tableTuples.Count() - 1; i++)
             {
@@ -80,11 +94,14 @@ public abstract class TableClass : MonoBehaviour
             }
             tableTuples[tableTuples.Count() - 1] = Tuple.None;
             loopLength -= 1;
-        }
+        }*/
+        tableTuples = tableTuples.OrderByDescending(t => t != Tuple.None).ToArray();
     }
 
-    protected void ClearTable(){
-        for(int i = 0; i < capacity; i++){
+    protected void ClearTable()
+    {
+        for (int i = 0; i < capacity; i++)
+        {
             tableTuples[i] = Tuple.None;
         }
     }

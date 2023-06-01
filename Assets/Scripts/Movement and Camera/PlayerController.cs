@@ -5,66 +5,70 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed;
-    public Rigidbody2D rb;
-    public Animator animator;
-
-    Vector2 movement;
+    //Movement
+    [SerializeField] private float _moveSpeed;
+    private Rigidbody2D _rb;
+    private Vector2 _movement;
     private Vector3 _facingDirection = -Vector3.up;
-    //Tables
-    [SerializeField] LayerMask tableLayer;    
+
+    //Animation
+    private Animator _animator;
+
     //Tuples
     public Tuple currentTuple;
 
     private void Awake()
     {
         currentTuple = Tuple.None;
+
+        _rb = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        _movement.x = Input.GetAxisRaw("Horizontal");
+        _movement.y = Input.GetAxisRaw("Vertical");
 
-        movement = new Vector2(movement.x, movement.y).normalized;
+        _movement = new Vector2(_movement.x, _movement.y).normalized;
 
-        animator.SetFloat("SpeedHorizontal", movement.x);
-        animator.SetFloat("SpeedVertical", movement.y);
-        animator.SetFloat("Speed", movement.sqrMagnitude);
+        _animator.SetFloat("SpeedHorizontal", _movement.x);
+        _animator.SetFloat("SpeedVertical", _movement.y);
+        _animator.SetFloat("Speed", _movement.sqrMagnitude);
 
         if (Input.GetAxisRaw("Horizontal") == 1 || Input.GetAxisRaw("Horizontal") == -1 || Input.GetAxisRaw("Vertical") == 1 || Input.GetAxisRaw("Vertical") == -1)
         {
-            animator.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
-            animator.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
-            SetFacingDirection(movement.x, movement.y);
+            _animator.SetFloat("LastMoveX", Input.GetAxisRaw("Horizontal"));
+            _animator.SetFloat("LastMoveY", Input.GetAxisRaw("Vertical"));
+            SetFacingDirection(_movement.x, _movement.y);
         }
 
         if (Input.GetKeyDown(KeyCode.X) && CheckTable())
         {
             GetTable().tableScript.SubstituteAdd();
-            UIManager.Instance.ChangeImage(currentTuple.sprite);
+            PaintPlayerTuple();
         }
         if (Input.GetKeyDown(KeyCode.Z) && CheckTable())
         {
             GetTable().tableScript.UseTable();
-            UIManager.Instance.ChangeImage(currentTuple.sprite);
+            PaintPlayerTuple();
         }
     }
     void FixedUpdate()
     {
-        rb.MovePosition(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
+        _rb.MovePosition(_rb.position + _movement * _moveSpeed * Time.fixedDeltaTime);
     }
 
     public bool CheckTable()
     {
-        return Physics2D.Raycast(transform.position, _facingDirection, tableLayer);
+        return Physics2D.Raycast(transform.position, _facingDirection);
     }
 
     public Table GetTable()
     {
         //Talvez tanto null acabe gerando bugs imprevistos
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, _facingDirection, tableLayer);
-        if (Physics2D.Raycast(transform.position, _facingDirection, tableLayer))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _facingDirection);
+        if (Physics2D.Raycast(transform.position, _facingDirection))
         {
             if (hit.transform.GetComponent<Table>() != null)
                 return hit.transform.GetComponent<Table>();
@@ -83,6 +87,11 @@ public class PlayerController : MonoBehaviour
         
         else if (Mathf.Abs(horizontalMovement) > 0.1f) 
             _facingDirection = Mathf.Sign(horizontalMovement) * Vector3.right;
+    }
+
+    public void PaintPlayerTuple()
+    {
+        UIManager.Instance.ChangeImage(currentTuple.sprite);
     }
 
     private void OnDrawGizmos()

@@ -4,25 +4,28 @@ using UnityEngine;
 
 public class WaitTable : TableClass
 {
-    private Table table => GetComponent<Table>();
+    private Table ThisTable => GetComponent<Table>();
 
     public float boilTime;
     public float overcookTime;
     public State stateTransition;
     public State overcookedState;
-    private bool coroutineRunning;
+    private bool _coroutineRunning;
+
+    //Second fill must be the overcook one
+    private TableFillUI[] FillUIs => GetComponents<TableFillUI>();
 
     public override void UseTable()
     {
         //Tem que chegar se todos os ingredientes são mixeable... (tlvz fazer um método no TableScript pra esse tipo de coisa)
         //Também, deve-se decidir se a tábua só pode ser usada quando cheia ou não
-        if(!coroutineRunning)
+        if(!_coroutineRunning)
             StartCoroutine(WaitCoroutine());
     }
 
     IEnumerator WaitCoroutine()
     {
-        coroutineRunning = true;
+        _coroutineRunning = true;
         float timer = 0;
         while (timer <= overcookTime + 1)
         {
@@ -36,15 +39,42 @@ public class WaitTable : TableClass
             else if (timer >= overcookTime)
             {
                 Tuple.ChangeState(tableTuples [0], overcookedState);
+                FillUIs[1].SetImageActive(false);
             }
 
             if (tableTuples[0] == Tuple.None)
             {
-                table.GenerateTable();
+                ThisTable.GenerateTable();
+
+                FillUIs[0].SetImageActive(false);
+                FillUIs[1].SetImageActive(false);
                 break;
             }
+            SetFirstSpriteWithCrawler();
+            PaintTable();
+            SetUI(timer);
+
             yield return null;
         }
-        coroutineRunning = false;
+        _coroutineRunning = false;
+    }
+
+    private void SetUI(float timer)
+    {
+        if (FillUIs.Length != 2)
+            throw new System.Exception("Wait table UI has wrong count of fillers.");
+        
+
+        if (timer < boilTime)
+        {
+            FillUIs[0].SetImageActive(true);
+            FillUIs[0].SetRelativeFill(timer, boilTime);
+        }
+        else if (timer < overcookTime)
+        {
+            FillUIs[0].SetImageActive(false);
+            FillUIs[1].SetImageActive(true);
+            FillUIs[1].SetRelativeFill(timer - boilTime, overcookTime - boilTime);
+        }
     }
 }

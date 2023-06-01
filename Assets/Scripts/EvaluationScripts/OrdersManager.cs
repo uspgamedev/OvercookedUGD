@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class OrdersManager : MonoBehaviour
 {
@@ -50,7 +51,8 @@ public class OrdersManager : MonoBehaviour
         orderList.Remove(orderList[e.index]);
         timer = 5f;
         currentScore = currentScore + e.points;
-        score.fillAmount = currentScore / passingScore;
+        score.DOFillAmount(currentScore / passingScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
+        //score.fillAmount = currentScore / passingScore;
         if(currentScore >= passingScore){
             PhaseOneEnd?.Invoke(this, EventArgs.Empty);
         }

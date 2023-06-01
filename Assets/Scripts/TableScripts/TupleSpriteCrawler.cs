@@ -29,10 +29,10 @@ public class TupleSpriteCrawler
     {
         switch (state)
         {
-            case State.None: 
-                return null;
+            case State.None:
+                return GameManager.Instance.genericFood;
             default:
-                return null;
+                return GameManager.Instance.genericFood;
         }
     }
 

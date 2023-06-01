@@ -13,9 +13,11 @@ MonoBehaviour:
   m_Name: AppleSalad
   m_EditorClassIdentifier: 
   ingredient:
-    ingredientArray: []
-    overcookable: 0
-    sliceable: 0
+    ingredientArray:
+    - RedApple
+    - GreenApple
+    overcookable: 1
+    sliceable: 1
     mixeable: 0
-  state: 0
-  tupleSprite: {fileID: 0}
+  state: 2
+  tupleSprite: {fileID: 21300000, guid: 4dbd7b102c1e1054893093612a46779b, type: 3}

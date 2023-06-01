@@ -8,6 +8,8 @@ public class KeepTable : TableClass
     public float sliceTime;
     public State stateTransition;
 
+    private TableFillUI FillUI => GetComponent<TableFillUI>();
+
     public override void UseTable()
     {
         //Três estados: vazio, incompleto e completo
@@ -27,10 +29,20 @@ public class KeepTable : TableClass
             {
                 Tuple.ChangeState(tableTuples [0], stateTransition);
                 SubstituteAdd();
+                PaintTable();
+                Player.PaintPlayerTuple();
+                FillUI.SetImageActive(false);
                 yield break;
             }
+            SetUI(timer);
             yield return null;
         }
-        
+        FillUI.SetImageActive(false);
+    }
+
+    private void SetUI(float fillAmount)
+    {
+        FillUI.SetImageActive(true);
+        FillUI.SetRelativeFill(fillAmount, sliceTime);
     }
 }

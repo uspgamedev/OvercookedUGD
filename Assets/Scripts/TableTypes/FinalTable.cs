@@ -39,7 +39,8 @@ public class FinalTable : TableClass
             });
             order.gameObject.GetComponent<Transform>().DOPunchPosition(GameEasings.FinalTablePunchVector, GameEasings.FinalTablePunchDuration).OnComplete(()=>
             Destroy(order.gameObject));
-            
+
+            //foodRenderer.GetComponent<ParticleSystem>().Play();
         }
         else
         {
