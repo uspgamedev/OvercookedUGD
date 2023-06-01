@@ -19,7 +19,7 @@ public class OrdersManager : MonoBehaviour
 
     [SerializeField] private Image score;
 
-    private float passingScore;
+    public float passingScore;
     private float currentScore;
 
     private bool over;
@@ -39,7 +39,6 @@ public class OrdersManager : MonoBehaviour
 
     private void Start(){
         FinalTable.Instance.deliveredOrder += FinalTable_DeliveredOrder;
-        passingScore = 10;
         currentScore = 0;
         possiblePoints = 0;
         timer = 3f;
@@ -52,7 +51,6 @@ public class OrdersManager : MonoBehaviour
         timer = 5f;
         currentScore = currentScore + e.points;
         score.DOFillAmount(currentScore / passingScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
-        //score.fillAmount = currentScore / passingScore;
         if(currentScore >= passingScore){
             PhaseOneEnd?.Invoke(this, EventArgs.Empty);
         }
@@ -60,7 +58,6 @@ public class OrdersManager : MonoBehaviour
 
 
     void Update(){
-
         if(possiblePoints >= 2 * passingScore) over = true;
         timer -= Time.deltaTime;
         if(timer <= 0f){

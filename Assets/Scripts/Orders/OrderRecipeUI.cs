@@ -26,8 +26,6 @@ public class OrderRecipeUI : MonoBehaviour
 
     public List<OrderSO> currentList;
 
-    //[SerializeField] private GameObject bar;
-
     public static OrderRecipeUI Instance { get; private set;}
 
 
@@ -59,7 +57,6 @@ public class OrderRecipeUI : MonoBehaviour
         if(!done){
             if(currentTimer > 0){
                 currentTimer = currentTimer - Time.deltaTime;
-                //bar.GetComponent<Image>().fillAmount = currentTimer/maxTimer;
                 this.gameObject.transform.GetChild(3).GetComponent<Image>().fillAmount = currentTimer/maxTimer;
             }
             else{

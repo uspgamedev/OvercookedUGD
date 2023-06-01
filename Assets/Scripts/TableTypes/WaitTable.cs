@@ -13,12 +13,12 @@ public class WaitTable : TableClass
     private bool _coroutineRunning;
 
     //Second fill must be the overcook one
-    private TableFillUI[] FillUIs => GetComponents<TableFillUI>();
+    //private TableFillUI[] FillUIs => GetComponents<TableFillUI>();
 
     public override void UseTable()
     {
-        //Tem que chegar se todos os ingredientes são mixeable... (tlvz fazer um método no TableScript pra esse tipo de coisa)
-        //Também, deve-se decidir se a tábua só pode ser usada quando cheia ou não
+        //Tem que chegar se todos os ingredientes sï¿½o mixeable... (tlvz fazer um mï¿½todo no TableScript pra esse tipo de coisa)
+        //Tambï¿½m, deve-se decidir se a tï¿½bua sï¿½ pode ser usada quando cheia ou nï¿½o
         if(!_coroutineRunning)
             StartCoroutine(WaitCoroutine());
     }
@@ -39,27 +39,27 @@ public class WaitTable : TableClass
             else if (timer >= overcookTime)
             {
                 Tuple.ChangeState(tableTuples [0], overcookedState);
-                FillUIs[1].SetImageActive(false);
+                //FillUIs[1].SetImageActive(false);
             }
 
             if (tableTuples[0] == Tuple.None)
             {
                 ThisTable.GenerateTable();
 
-                FillUIs[0].SetImageActive(false);
-                FillUIs[1].SetImageActive(false);
+                /*FillUIs[0].SetImageActive(false);
+                FillUIs[1].SetImageActive(false);*/
                 break;
             }
             SetFirstSpriteWithCrawler();
             PaintTable();
-            SetUI(timer);
+            //SetUI(timer);
 
             yield return null;
         }
         _coroutineRunning = false;
     }
 
-    private void SetUI(float timer)
+    /*private void SetUI(float timer)
     {
         if (FillUIs.Length != 2)
             throw new System.Exception("Wait table UI has wrong count of fillers.");
@@ -76,5 +76,5 @@ public class WaitTable : TableClass
             FillUIs[1].SetImageActive(true);
             FillUIs[1].SetRelativeFill(timer - boilTime, overcookTime - boilTime);
         }
-    }
+    }*/
 }

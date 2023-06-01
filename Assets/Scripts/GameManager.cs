@@ -9,9 +9,13 @@ public class GameManager : MonoBehaviour
 { 
     public static GameManager Instance { get; private set; }
 
+    public event EventHandler BossBattle;
+
     public GameObject player;
     
     public Transform GameOver;
+
+    public Transform PhaseTwo;
 
     [SerializeField] private Image FinalScore;
 
@@ -39,13 +43,16 @@ public class GameManager : MonoBehaviour
     private void OrdersManager_PhaseOneEnd(object sender, System.EventArgs e){
         Time.timeScale = 0f;
         AudioManager.Instance.Pause();
+        PhaseTwo.gameObject.SetActive(true);
+        BossBattle?.Invoke(this, EventArgs.Empty);
+
     }
 
     private void OrdersManager_GameOver(object sender, System.EventArgs e){
         Time.timeScale = 0f;
         AudioManager.Instance.Pause();
-        GameOver.GetChild(0).GetComponent<Image>().fillAmount = FinalScore.fillAmount;
-        GameOver.GetChild(0).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + (FinalScore.fillAmount * 10) + " points";
+        GameOver.GetChild(1).GetComponent<Image>().fillAmount = FinalScore.fillAmount;
+        GameOver.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + (FinalScore.fillAmount * 10) + " points";
         GameOver.gameObject.SetActive(true);
     }
 

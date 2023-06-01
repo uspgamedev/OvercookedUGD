@@ -22,7 +22,7 @@ public abstract class TableClass : MonoBehaviour
     protected int Amount => tableTuples.Where(t => t != null).Count(t => t != Tuple.None);
     protected bool SubstitutionPossible => (Player.currentTuple == Tuple.None || tableTuples[0] == Tuple.None);
     protected bool AdditionPossible => (Player.currentTuple != Tuple.None && tableTuples[0] != Tuple.None && Amount < capacity);
-    private IngredientsDisplayUI DisplayUI
+    /*private IngredientsDisplayUI DisplayUI
     {
         get
         {
@@ -31,7 +31,7 @@ public abstract class TableClass : MonoBehaviour
                 throw new System.Exception("Table UI images count not equal to capacity: IngredientsDisplayUI component might be missing or not correctly setup.");
             return manyUI;
         }
-    }
+    }*/
 
     public abstract void UseTable();
 
@@ -79,7 +79,7 @@ public abstract class TableClass : MonoBehaviour
     public void PaintTable()
     {
         foodRenderer.sprite = tableTuples[0].sprite;
-        DisplayUI.SetDisplays(tableTuples);
+        //DisplayUI.SetDisplays(tableTuples);
     }
 
     protected void OrderTuples()
