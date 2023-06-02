@@ -13,7 +13,7 @@ public class WaitTable : TableClass
     private bool _coroutineRunning;
 
     //Second fill must be the overcook one
-    //private TableFillUI[] FillUIs => GetComponents<TableFillUI>();
+    private TableFillUI[] FillUIs => GetComponents<TableFillUI>();
 
     public override void UseTable()
     {
@@ -39,27 +39,27 @@ public class WaitTable : TableClass
             else if (timer >= overcookTime)
             {
                 Tuple.ChangeState(tableTuples [0], overcookedState);
-                //FillUIs[1].SetImageActive(false);
+                FillUIs[1].SetImageActive(false);
             }
 
             if (tableTuples[0] == Tuple.None)
             {
                 ThisTable.GenerateTable();
 
-                /*FillUIs[0].SetImageActive(false);
-                FillUIs[1].SetImageActive(false);*/
+                FillUIs[0].SetImageActive(false);
+                FillUIs[1].SetImageActive(false);
                 break;
             }
             SetFirstSpriteWithCrawler();
             PaintTable();
-            //SetUI(timer);
+            SetUI(timer);
 
             yield return null;
         }
         _coroutineRunning = false;
     }
 
-    /*private void SetUI(float timer)
+    private void SetUI(float timer)
     {
         if (FillUIs.Length != 2)
             throw new System.Exception("Wait table UI has wrong count of fillers.");
@@ -76,5 +76,5 @@ public class WaitTable : TableClass
             FillUIs[1].SetImageActive(true);
             FillUIs[1].SetRelativeFill(timer - boilTime, overcookTime - boilTime);
         }
-    }*/
+    }
 }
