@@ -4,6 +4,7 @@ using UnityEngine;
 using System;
 using UnityEngine.UI;
 using TMPro;
+using DG.Tweening;
 
 public class GameManager : MonoBehaviour
 { 
@@ -12,8 +13,14 @@ public class GameManager : MonoBehaviour
     public event EventHandler BossBattle;
 
     public GameObject player;
+
+    public GameObject Camera;
+
+    public Transform BossUI;
     
     public Transform GameOver;
+
+    public bool Paused = false;
 
     public Transform PhaseTwo;
 
@@ -41,19 +48,41 @@ public class GameManager : MonoBehaviour
     }
 
     private void OrdersManager_PhaseOneEnd(object sender, System.EventArgs e){
-        Time.timeScale = 0f;
+        Paused = true;
         AudioManager.Instance.Pause();
+        Camera.GetComponent<Transform>().DOPunchPosition(GameEasings.CameraShakeVector, GameEasings.CameraShakeDuration).OnComplete(() => StartCoroutine(shakeCamera()));
+        //treme
+        //passa 1 segundo
+        //treme
         PhaseTwo.gameObject.SetActive(true);
-        BossBattle?.Invoke(this, EventArgs.Empty);
+        StartCoroutine(waitOrderManager());
+        OrdersManager.Instance.Clean();
+        OrdersUI.Instance.Clean();
+        Paused = false;
+    }
 
+    IEnumerator waitOrderManager(){
+        yield return new WaitForSeconds(3f);
+        PhaseTwo.GetComponent<CanvasGroup>().DOFade(1f, 1f).SetEase(Ease.InCubic);
+        yield return new WaitForSeconds(2f);
+        PhaseTwo.GetComponent<CanvasGroup>().DOFade(0f, 1f).SetEase(Ease.OutCubic).OnComplete(() => BossBattle?.Invoke(this, EventArgs.Empty));
+        yield return new WaitForSeconds(1f);
+        BossUI.gameObject.SetActive(true);
+    }
+
+    IEnumerator shakeCamera(){
+        yield return new WaitForSeconds(2f);
+        Camera.GetComponent<Transform>().DOPunchPosition(GameEasings.CameraShakeVector, GameEasings.CameraShakeDuration);
     }
 
     private void OrdersManager_GameOver(object sender, System.EventArgs e){
-        Time.timeScale = 0f;
+        //Time.timeScale = 0f;
+        Paused = true;
         AudioManager.Instance.Pause();
-        GameOver.GetChild(1).GetComponent<Image>().fillAmount = FinalScore.fillAmount;
-        GameOver.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + (FinalScore.fillAmount * 10) + " points";
+        GameOver.GetChild(1).GetComponent<Image>().DOFillAmount(FinalScore.fillAmount, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
+        GameOver.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
         GameOver.gameObject.SetActive(true);
+        GameOver.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetEase(Ease.InCubic);
     }
 
     

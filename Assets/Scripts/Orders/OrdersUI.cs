@@ -8,9 +8,11 @@ public class OrdersUI : MonoBehaviour
     [SerializeField] private Transform list;
     [SerializeField] private Transform orderTemplate;
 
+    public static OrdersUI Instance { get; private set;}
+
     private int i = 0;
 
-    private float maxTime = 10f;
+    private float maxTime;
 
     private void Start(){
         OrdersManager.Instance.ReceivedOrder += OrdersManager_ReceivedOrder;
@@ -23,6 +25,7 @@ public class OrdersUI : MonoBehaviour
 
     private void Awake(){
         orderTemplate.gameObject.SetActive(false);
+        Instance = this;
     }
 
     private void UpdateVisual(){
@@ -36,5 +39,16 @@ public class OrdersUI : MonoBehaviour
         orderRUI.SetTimer(maxTime * (OrdersManager.Instance.GetOrderList().Count));
         orderRUI.Name(order);
         
+    }
+
+    public void Clean(){
+        int childs = this.transform.GetChild(0).childCount;
+        for(int i = 1; i < childs; i++){
+            Destroy(this.transform.GetChild(0).GetChild(i).gameObject);
+        }
+    }
+
+    public void SetTime(float t){
+        maxTime = t;
     }
 }

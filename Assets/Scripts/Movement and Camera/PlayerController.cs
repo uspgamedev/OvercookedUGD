@@ -27,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if(GameManager.Instance.Paused) return;
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
 
