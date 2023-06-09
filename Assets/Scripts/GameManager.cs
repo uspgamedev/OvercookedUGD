@@ -75,11 +75,11 @@ public class GameManager : MonoBehaviour
         Camera.GetComponent<Transform>().DOPunchPosition(GameEasings.CameraShakeVector, GameEasings.CameraShakeDuration);
     }
 
-    private void OrdersManager_GameOver(object sender, System.EventArgs e){
+    private void OrdersManager_GameOver(object sender, OrdersManager.GameOverEventArgs e){
         //Time.timeScale = 0f;
         Paused = true;
         AudioManager.Instance.Pause();
-        GameOver.GetChild(1).GetComponent<Image>().DOFillAmount(FinalScore.fillAmount, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
+        GameOver.GetChild(1).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
         GameOver.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
         GameOver.gameObject.SetActive(true);
         GameOver.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetEase(Ease.InCubic);

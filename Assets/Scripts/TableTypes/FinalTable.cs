@@ -11,6 +11,9 @@ public class FinalTable : TableClass
     [SerializeField] public Transform orderList;
 
     public event EventHandler<DeliveredOrderEventArgs> deliveredOrder;
+
+    public event EventHandler wrongOrder;
+
     public class DeliveredOrderEventArgs : EventArgs{
         public int index;
         public int points;
@@ -37,14 +40,14 @@ public class FinalTable : TableClass
                 index = orderedIngredients.IndexOf(tableTuples[0].ingredient),
                 points = order.points
             });
-            order.gameObject.GetComponent<Transform>().DOPunchPosition(GameEasings.FinalTablePunchVector, GameEasings.FinalTablePunchDuration).OnComplete(()=>
-            Destroy(order.gameObject));
+            //order.gameObject.GetComponent<Transform>().DOPunchPosition(GameEasings.FinalTablePunchVector, GameEasings.FinalTablePunchDuration).OnComplete(()=>
+            Destroy(order.gameObject);
 
             //foodRenderer.GetComponent<ParticleSystem>().Play();
         }
         else
         {
-            Debug.Log("Errado");
+            wrongOrder?.Invoke(this, EventArgs.Empty);
         }
 
         PlayFadeAnimation();
