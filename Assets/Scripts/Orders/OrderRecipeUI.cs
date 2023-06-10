@@ -60,7 +60,7 @@ public class OrderRecipeUI : MonoBehaviour
                 this.gameObject.transform.GetChild(3).GetComponent<Image>().fillAmount = currentTimer/maxTimer;
             }
             else{
-                currentList.Remove(currentList[0]);
+                currentList.Remove(thisOrder);
                 Destroy(this.gameObject);
             }
         }
