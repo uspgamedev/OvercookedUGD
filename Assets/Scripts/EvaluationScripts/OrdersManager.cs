@@ -94,7 +94,7 @@ public class OrdersManager : MonoBehaviour
             });
             gameState = GameState.GAMEOVER;
         }
-        if(orderList.Count == 0){
+        if(orderList.Count == 0 && !over){
             gameState = GameState.OVER;
         }
     }

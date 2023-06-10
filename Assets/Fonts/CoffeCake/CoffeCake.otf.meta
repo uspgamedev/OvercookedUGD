@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 5b25a6489cce6a64e853b49f5c7bab0c
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - CoffeCake
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: f874bfb38e89a4146a8a84b25d37f28e, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

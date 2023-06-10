@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     //Movement
     [SerializeField] private float _moveSpeed;
     private Rigidbody2D _rb;
+
+    public LayerMask IgnoreMe;
     private Vector2 _movement;
     private Vector3 _facingDirection = -Vector3.up;
 
@@ -62,14 +64,14 @@ public class PlayerController : MonoBehaviour
 
     public bool CheckTable()
     {
-        return Physics2D.Raycast(transform.position, _facingDirection);
+        return Physics2D.Raycast(transform.position, _facingDirection, IgnoreMe);
     }
 
     public Table GetTable()
     {
         //Talvez tanto null acabe gerando bugs imprevistos
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, _facingDirection);
-        if (Physics2D.Raycast(transform.position, _facingDirection))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _facingDirection, IgnoreMe);
+        if (Physics2D.Raycast(transform.position, _facingDirection, IgnoreMe))
         {
             if (hit.transform.GetComponent<Table>() != null)
                 return hit.transform.GetComponent<Table>();

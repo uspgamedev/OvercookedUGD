@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 4f86b30eff3c8a444a8c7b7f6cd0db2f
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Socake
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 0bd6a1ed1d997b54c9eff6246ce04e98, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
