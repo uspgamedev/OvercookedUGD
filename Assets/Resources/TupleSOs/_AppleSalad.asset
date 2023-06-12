@@ -22,5 +22,6 @@ MonoBehaviour:
   dishAux:
   - {fileID: 11400000, guid: 194a0d2065fab304986bc7a04806b5e6, type: 2}
   - {fileID: 11400000, guid: d271c17c5534e254482db5a223bfaab9, type: 2}
+  me: {fileID: 21300000, guid: e3e4c3fb398a01c42a12f5f649761d92, type: 3}
   dishName: Apple Salad
   value: 2

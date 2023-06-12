@@ -46,11 +46,14 @@ public class OrderRecipeUI : MonoBehaviour
             else Destroy(ingredient.gameObject);
         }
 
-        foreach(TupleSO ingredient in order.dishAux){
+        /*foreach(TupleSO ingredient in order.dishAux){
             Transform ingredientIcon = Instantiate(ingredientTemplate, list);
             ingredientIcon.gameObject.SetActive(true);
             ingredientIcon.GetComponent<Image>().sprite = ingredient.tupleSprite;
-        }
+        }*/
+        Transform ingredientIcon = Instantiate(ingredientTemplate, list);
+        ingredientIcon.gameObject.SetActive(true);
+        ingredientIcon.GetComponent<Image>().sprite = order.me;
     }
 
     private void Update(){

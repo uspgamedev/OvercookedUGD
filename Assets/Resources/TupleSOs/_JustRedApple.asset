@@ -22,5 +22,6 @@ MonoBehaviour:
   dishAux:
   - {fileID: 11400000, guid: d271c17c5534e254482db5a223bfaab9, type: 2}
   - {fileID: 11400000, guid: d271c17c5534e254482db5a223bfaab9, type: 2}
+  me: {fileID: 21300000, guid: 94f751e9896931149a7b2ca3f8293570, type: 3}
   dishName: Just Red Apple
   value: 2

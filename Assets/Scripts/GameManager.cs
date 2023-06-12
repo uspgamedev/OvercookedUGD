@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     
     public Transform GameOver;
 
-    public bool Paused = false;
+    public bool Paused;
 
     public Transform PhaseTwo;
 
@@ -39,11 +39,13 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+        Paused = false;
     }
 
     private void Start(){
         OrdersManager.Instance.PhaseOneEnd += OrdersManager_PhaseOneEnd;
         OrdersManager.Instance.GameOver += OrdersManager_GameOver;
+        Paused = false;
     }
 
     private void OrdersManager_PhaseOneEnd(object sender, System.EventArgs e){
