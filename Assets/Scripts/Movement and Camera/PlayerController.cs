@@ -29,7 +29,10 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if(GameManager.Instance.Paused) return;
+        if(GameManager.Instance.Paused){
+            _movement = new Vector2(0, 0).normalized;
+            return;
+        }
         _movement.x = Input.GetAxisRaw("Horizontal");
         _movement.y = Input.GetAxisRaw("Vertical");
 
@@ -102,4 +105,6 @@ public class PlayerController : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawRay(new Ray(transform.position, _facingDirection));
     }
+
+    
 }

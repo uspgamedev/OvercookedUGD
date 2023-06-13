@@ -16,6 +16,19 @@ public class OrdersUI : MonoBehaviour
 
     private void Start(){
         OrdersManager.Instance.ReceivedOrder += OrdersManager_ReceivedOrder;
+        OrdersManager.Instance.BossOrdered += OrdersManager_BossOrdered;
+    }
+
+    private void OrdersManager_BossOrdered(object sender, OrdersManager.BossOrderedEventArgs e){
+        for(int i = 0; i < e.number; i++){
+            Transform orderCard = Instantiate(orderTemplate, list);
+            orderCard.name = "BossOrder" + i;
+            orderCard.gameObject.SetActive(true);
+            OrderRecipeUI orderRUI = orderCard.GetComponent<OrderRecipeUI>();
+            orderRUI.GetComponent<CanvasGroup>().DOFade(1,GameEasings.OrderCardFadeDuration).SetEase(GameEasings.OrderCardFadeEase);
+            orderRUI.SetTimer(maxTime);
+            orderRUI.Name(e.newOrder);
+        }
     }
 
     private void OrdersManager_ReceivedOrder(object sender, System.EventArgs e){
@@ -38,7 +51,10 @@ public class OrdersUI : MonoBehaviour
         orderRUI.GetComponent<CanvasGroup>().DOFade(1,GameEasings.OrderCardFadeDuration).SetEase(GameEasings.OrderCardFadeEase);
         orderRUI.SetTimer(maxTime * (OrdersManager.Instance.GetOrderList().Count));
         orderRUI.Name(order);
-        
+    }
+
+    private void GenerateBoss(){
+
     }
 
     public void Clean(){

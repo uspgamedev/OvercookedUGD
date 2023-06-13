@@ -37,6 +37,7 @@ public class OrderRecipeUI : MonoBehaviour
     }
 
     public void Name(OrderSO order){
+
         recipeName.text = order.dishName;
         thisOrder = order;
         points = order.value;
@@ -55,6 +56,7 @@ public class OrderRecipeUI : MonoBehaviour
         ingredientIcon.gameObject.SetActive(true);
         ingredientIcon.GetComponent<Image>().sprite = order.me;
     }
+
 
     private void Update(){
         if(!done){

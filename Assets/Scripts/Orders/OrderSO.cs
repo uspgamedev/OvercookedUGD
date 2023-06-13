@@ -7,6 +7,8 @@ public class OrderSO : ScriptableObject {
     
     public Ingredient dishRecipe;
     public List<TupleSO> dishAux;
+
+    public string hint;
     
     public Sprite me;
 
