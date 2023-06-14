@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         AudioManager.Instance.Pause();
         RecipesUI.SetActive(false);
         GameOver.GetChild(1).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
-        GameOver.GetChild(1).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
+        GameOver.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
         GameOver.gameObject.SetActive(true);
         GameOver.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetEase(Ease.InCubic);
     }

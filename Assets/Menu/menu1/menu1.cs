@@ -5,17 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class menu1 : MonoBehaviour
 {
-   public void PlayGame ()
+    public void PlayGame()
     {
-        SceneManager.LoadScene (SceneManager.GetActiveScene().buildIndex + 3);
+        //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
+        SceneManager.LoadScene("FirstLevel");
     }
 
-    public void QuitGame ()
+    public void QuitGame()
     {
-        Debug.Log ("se n der erro foi milagre");
+        Debug.Log("se n der erro foi milagre");
         Application.Quit();
     }
 
-   
+    public void MainMenu()
+    {
+        SceneManager.LoadScene("Menu 1");
+    }
+
+
 
 }

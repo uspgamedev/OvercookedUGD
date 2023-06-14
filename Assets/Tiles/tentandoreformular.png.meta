@@ -33,7 +33,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -42,12 +42,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 16
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -70,7 +70,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -115,7 +115,406 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: tentandoreformular_0
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 80
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55811cf6dd7f01543a02a73879e8ed28
+      internalID: 1997429028
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 80
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b06cbbfc0d3defc4e8cb3b375dc818e7
+      internalID: 1135675884
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_2
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 80
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26019bebd1e176747b520337bfd0f1d1
+      internalID: 1724719847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_3
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 86
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22f332dae61bc254ab3cfdf1711e77a2
+      internalID: -1446410895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_4
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 85
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0e2aa6782e49e8448e9506266907091
+      internalID: -906406509
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_5
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 86
+        width: 16
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54f16cfc3b1b3f34da8d5eda64159bee
+      internalID: -687778627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_6
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 70
+        width: 11
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 02b6800accb7a16488b212b109e22124
+      internalID: -512545292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_7
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 69
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42a55c9083f5aed4aaa7789c18103f43
+      internalID: -768490529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_8
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 48
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10913fa8558403f4bad6546a350561ab
+      internalID: 998671844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_9
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 48
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29bd54b647c50ae448f11a21ed08c7f7
+      internalID: -1387127868
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_10
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 48
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c04fff1938fa6f042aac0b864644e0cd
+      internalID: -1554562791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_11
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 52
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 365920ea073976e40b43d725aa462c9f
+      internalID: -851978923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_12
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 53
+        width: 11
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b6beea8754e4af4c9b2fd8f0b362795
+      internalID: 1093930367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_13
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 49
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e41f934b36c83814fb5aa7e6c7ea5406
+      internalID: -815182678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_14
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 36
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 51d4049e35b27c04c8556f39597ee47b
+      internalID: 1806662603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 33
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c5fffd3a528a7a4196e53390fa7c3c6
+      internalID: -235576853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_16
+      rect:
+        serializedVersion: 2
+        x: 18
+        y: 16
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9af53c5e58c2324e9b508a81584098b
+      internalID: 926551770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_17
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 16
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b901656c31f9df64691747ebfb280ac0
+      internalID: -1347627651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tentandoreformular_18
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 16
+        width: 11
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e27ff2e1ddac7a4c81376714f7d7d87
+      internalID: 729902131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -126,7 +525,26 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      tentandoreformular_0: 1997429028
+      tentandoreformular_1: 1135675884
+      tentandoreformular_10: -1554562791
+      tentandoreformular_11: -851978923
+      tentandoreformular_12: 1093930367
+      tentandoreformular_13: -815182678
+      tentandoreformular_14: 1806662603
+      tentandoreformular_15: -235576853
+      tentandoreformular_16: 926551770
+      tentandoreformular_17: -1347627651
+      tentandoreformular_18: 729902131
+      tentandoreformular_2: 1724719847
+      tentandoreformular_3: -1446410895
+      tentandoreformular_4: -906406509
+      tentandoreformular_5: -687778627
+      tentandoreformular_6: -512545292
+      tentandoreformular_7: -768490529
+      tentandoreformular_8: 998671844
+      tentandoreformular_9: -1387127868
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
