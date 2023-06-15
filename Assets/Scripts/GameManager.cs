@@ -127,8 +127,6 @@ public class GameManager : MonoBehaviour
         Paused = true;
         AudioManager.Instance.Pause();
         RecipesUI.SetActive(false);
-        Debug.Log(NextPhase.GetChild(1));
-        Debug.Log(NextPhase.GetChild(2));
         NextPhase.GetChild(1).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
         NextPhase.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
         NextPhase.gameObject.SetActive(true);
