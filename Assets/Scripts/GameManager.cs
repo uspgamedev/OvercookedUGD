@@ -21,6 +21,8 @@ public class GameManager : MonoBehaviour
     
     public Transform GameOver;
 
+    public Transform NextPhase;
+
     public GameObject Wall;
 
     public GameObject RecipesUI;
@@ -56,6 +58,7 @@ public class GameManager : MonoBehaviour
     private void Start(){
         OrdersManager.Instance.PhaseOneEnd += OrdersManager_PhaseOneEnd;
         OrdersManager.Instance.GameOver += OrdersManager_GameOver;
+        OrdersManager.Instance.NextPhase += OrdersManager_NextPhase;
         SecretRecipe.Instance.foundPage += SecretRecipe_FoundPage;
         Wall.GetComponent<BoxCollider2D>().enabled = true;
         Camera.GetComponent<CameraController>().enabled = false;
@@ -118,5 +121,19 @@ public class GameManager : MonoBehaviour
         GameOver.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetEase(Ease.InCubic);
     }
 
-    
+    private void OrdersManager_NextPhase(object sender, OrdersManager.NextPhaseEventArgs e)
+    {
+        //Time.timeScale = 0f;
+        Paused = true;
+        AudioManager.Instance.Pause();
+        RecipesUI.SetActive(false);
+        Debug.Log(NextPhase.GetChild(1));
+        Debug.Log(NextPhase.GetChild(2));
+        NextPhase.GetChild(1).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
+        NextPhase.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
+        NextPhase.gameObject.SetActive(true);
+        NextPhase.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetEase(Ease.InCubic);
+    }
+
+
 }

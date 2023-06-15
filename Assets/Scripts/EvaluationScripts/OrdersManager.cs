@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using TMPro;
 
-public enum GameState{
+public enum GameState
+{
     WIN, GAMEOVER, PLAYING, BOSS, OVER
 }
 
@@ -16,7 +17,7 @@ public class OrdersManager : MonoBehaviour
     public event EventHandler ReceivedOrder;
 
     public event EventHandler PhaseOneEnd;
-    
+
 
     //temporario
     public Transform mainCamera;
@@ -24,22 +25,32 @@ public class OrdersManager : MonoBehaviour
 
     public event EventHandler<GameOverEventArgs> GameOver;
 
+    public event EventHandler<NextPhaseEventArgs> NextPhase;
+
     public event EventHandler<BossOrderedEventArgs> BossOrdered;
 
-    public class BossOrderedEventArgs : EventArgs{
+    public class BossOrderedEventArgs : EventArgs
+    {
         public int number;
 
         public OrderSO newOrder;
-        
+
     }
 
-    public class GameOverEventArgs : EventArgs{
+    public class GameOverEventArgs : EventArgs
+    {
+        public float fillScore;
+        public float totalScore;
+
+    }
+    public class NextPhaseEventArgs : EventArgs
+    {
         public float fillScore;
         public float totalScore;
 
     }
 
-    public static OrdersManager Instance { get; private set;}
+    public static OrdersManager Instance { get; private set; }
 
     [SerializeField] private RecipeListSO availableOrders;
 
@@ -65,13 +76,15 @@ public class OrdersManager : MonoBehaviour
 
     public List<OrderSO> orderList;
 
-    private void Awake(){
+    private void Awake()
+    {
         Instance = this;
 
         orderList = new List<OrderSO>();
     }
 
-    private void Start(){
+    private void Start()
+    {
         FinalTable.Instance.deliveredOrder += FinalTable_DeliveredOrder;
         FinalTable.Instance.wrongOrder += FinalTable_WrongOrder;
         GameManager.Instance.BossBattle += GameManager_BossBattle;
@@ -87,28 +100,34 @@ public class OrdersManager : MonoBehaviour
         gameState = GameState.PLAYING;
     }
 
-    private void FinalTable_DeliveredOrder(object sender, FinalTable.DeliveredOrderEventArgs e){
+    private void FinalTable_DeliveredOrder(object sender, FinalTable.DeliveredOrderEventArgs e)
+    {
         Debug.Log("Entregue");
         orderList.Remove(orderList[e.index]);
         StartCoroutine(Review());
-        if(gameState == GameState.PLAYING) currentScore = currentScore + e.points;
+        if (gameState == GameState.PLAYING) currentScore = currentScore + e.points;
         else bossScore = bossScore + e.points;
-        if(gameState != GameState.BOSS) score.DOFillAmount(currentScore / passingScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
-        if(currentScore >= passingScore && gameState == GameState.PLAYING){
+        if (gameState != GameState.BOSS) score.DOFillAmount(currentScore / passingScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
+        if (currentScore >= passingScore && gameState == GameState.PLAYING)
+        {
             PhaseOneEnd?.Invoke(this, EventArgs.Empty);
             //Debug.Log("antes de mudar estado pra ganhou é: " + gameState);
             gameState = GameState.WIN;
         }
-        else if(gameState == GameState.BOSS){
+        else if (gameState == GameState.BOSS)
+        {
             currentScore = currentScore + 10;
-            GameOver?.Invoke(this, new GameOverEventArgs{
+            NextPhase?.Invoke(this, new NextPhaseEventArgs
+            {
                 fillScore = currentScore,
                 totalScore = passingScore
             });
             gameState = GameState.GAMEOVER;
         }
-        else{
-            if(orderList.Count == 0 && over){
+        else
+        {
+            if (orderList.Count == 0 && over)
+            {
                 gameState = GameState.OVER;
             }
         }
@@ -122,24 +141,28 @@ public class OrdersManager : MonoBehaviour
         }*/
     }
 
-    IEnumerator Review(){
+    IEnumerator Review()
+    {
         face.SetActive(false);
         face.SetActive(true);
         yield return new WaitForSeconds(1f);
         face.SetActive(false);
     }
 
-    private void FinalTable_WrongOrder(object sender, EventArgs e){
+    private void FinalTable_WrongOrder(object sender, EventArgs e)
+    {
         mainCamera.DOPunchPosition(GameEasings.FinalTablePunchVector, GameEasings.FinalTablePunchDuration);
         Debug.Log("Errado");
     }
 
-    private void GameManager_BossBattle(object sender, EventArgs e){
+    private void GameManager_BossBattle(object sender, EventArgs e)
+    {
 
         OrderSO order = bossOrders.possibleOrders[UnityEngine.Random.Range(0, bossOrders.possibleOrders.Count)];
         orderList.Add(order);
         OrdersUI.Instance.SetTime(25f);
-        BossOrdered?.Invoke(this, new BossOrderedEventArgs{
+        BossOrdered?.Invoke(this, new BossOrderedEventArgs
+        {
             number = 1,
             newOrder = order
         });
@@ -149,37 +172,43 @@ public class OrdersManager : MonoBehaviour
     }
 
 
-    void Update(){
-        if(possiblePoints >= 2 * passingScore) over = true;
+    void Update()
+    {
+        if (possiblePoints >= 2 * passingScore) over = true;
         timer -= Time.deltaTime;
-        if(orderList.Count == 0 && over && gameState == GameState.PLAYING) gameState = GameState.OVER;
-        if(timer <= 0f && gameState == GameState.PLAYING){
-
-            if(!over && orderList.Count < maxRecipes){
+        if (orderList.Count == 0 && over && gameState == GameState.PLAYING) gameState = GameState.OVER;
+        if (timer <= 0f && gameState == GameState.PLAYING)
+        {
+            if (!over && orderList.Count < maxRecipes)
+            {
                 OrderSO order = availableOrders.possibleOrders[UnityEngine.Random.Range(0, availableOrders.possibleOrders.Count)];
 
                 orderList.Add(order);
                 ReceivedOrder?.Invoke(this, EventArgs.Empty);
                 possiblePoints = possiblePoints + order.value;
             }
-            else if(orderList.Count == 0){
+            else if (orderList.Count == 0)
+            {
                 gameState = GameState.OVER;
             }
 
             timer = cooldown;
         }
-        else if(orderList.Count == 0 && gameState == GameState.BOSS){
-            GameOver?.Invoke(this, new GameOverEventArgs{
+        else if (orderList.Count == 0 && gameState == GameState.BOSS)
+        {
+            GameOver?.Invoke(this, new GameOverEventArgs
+            {
                 fillScore = currentScore,
                 totalScore = passingScore
             });
             gameState = GameState.GAMEOVER;
         }
 
-
-        if(over && orderList.Count == 0 && gameState == GameState.OVER){
+        if (over && orderList.Count == 0 && gameState == GameState.OVER)
+        {
             //Debug.Log("antes de ver se a lista ta vazia é: " + gameState);
-            GameOver?.Invoke(this, new GameOverEventArgs{
+            GameOver?.Invoke(this, new GameOverEventArgs
+            {
                 fillScore = currentScore,
                 totalScore = passingScore
             });
@@ -188,16 +217,19 @@ public class OrdersManager : MonoBehaviour
         }
     }
 
-    public void Clean(){
+    public void Clean()
+    {
         orderList.Clear();
     }
 
-    public List<OrderSO> GetOrderList(){
+    public List<OrderSO> GetOrderList()
+    {
         return orderList;
     }
-    
 
-    public float GetScore(){
+
+    public float GetScore()
+    {
         //if(currentScore >= passingScore) return passingScore;
         return currentScore;
     }
