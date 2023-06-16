@@ -12,7 +12,7 @@ public class KeepTable : TableClass
 
     public override void UseTable()
     {
-        //Três estados: vazio, incompleto e completo
+        //Trï¿½s estados: vazio, incompleto e completo
         if (Player.currentTuple == Tuple.None && tableTuples [0] != Tuple.None)
         {
             StartCoroutine(KeepCoroutine());
@@ -28,6 +28,7 @@ public class KeepTable : TableClass
             if (timer >= sliceTime)
             {
                 Tuple.ChangeState(tableTuples [0], stateTransition);
+                SetFirstSpriteWithCrawler();
                 SubstituteAdd();
                 PaintTable();
                 Player.PaintPlayerTuple();

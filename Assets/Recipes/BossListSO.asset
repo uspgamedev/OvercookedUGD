@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BossListSO
   m_EditorClassIdentifier: 
   possibleOrders:
-  - {fileID: 11400000, guid: 80b3e9dacb5b2eb49bfdfca1a341aa3d, type: 2}
-  - {fileID: 11400000, guid: 2b198b3b8019a2247ba89e89532cc830, type: 2}
+  - {fileID: 11400000, guid: 2c0f9941f3ce6bc4b88ceabacfce4157, type: 2}
+  - {fileID: 11400000, guid: e68e18b6da460fd4daa0464f6815d797, type: 2}

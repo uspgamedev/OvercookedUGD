@@ -9,6 +9,8 @@ public class OrderSO : ScriptableObject {
     public List<TupleSO> dishAux;
 
     public string hint;
+
+    public float expectedTime;
     
     public Sprite me;
 

@@ -91,19 +91,19 @@ public class OrdersManager : MonoBehaviour
         currentScore = 0;
         bossScore = 0;
         possiblePoints = 0;
-        passingScore = 4;
+        passingScore = 20;
         timer = 3f;
         cooldown = 10f;
         over = false;
         maxRecipes = 5;
-        OrdersUI.Instance.SetTime(10f);
+        //OrdersUI.Instance.SetTime(10f);
         gameState = GameState.PLAYING;
     }
 
     private void FinalTable_DeliveredOrder(object sender, FinalTable.DeliveredOrderEventArgs e)
     {
         Debug.Log("Entregue");
-        orderList.Remove(orderList[e.index]);
+        orderList.Remove(e.aux);
         StartCoroutine(Review());
         if (gameState == GameState.PLAYING) currentScore = currentScore + e.points;
         else bossScore = bossScore + e.points;
@@ -160,14 +160,14 @@ public class OrdersManager : MonoBehaviour
 
         OrderSO order = bossOrders.possibleOrders[UnityEngine.Random.Range(0, bossOrders.possibleOrders.Count)];
         orderList.Add(order);
-        OrdersUI.Instance.SetTime(25f);
+        OrdersUI.Instance.SetTime(order.expectedTime);
         BossOrdered?.Invoke(this, new BossOrderedEventArgs
         {
             number = 1,
             newOrder = order
         });
         Hint.GetComponent<TextMeshProUGUI>().text = order.hint;
-        timer = 25f;
+        timer = order.expectedTime + 5f;
         gameState = GameState.BOSS;
     }
 

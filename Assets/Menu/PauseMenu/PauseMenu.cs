@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using UnityEngine;
+using System;
 
 
 public class PauseMenu : MonoBehaviour
@@ -9,6 +10,7 @@ public class PauseMenu : MonoBehaviour
 private bool paused;
 
 public GameObject PausePanel;
+public GameObject OptionsMenu;
 public string Scene;
 
 
@@ -47,5 +49,10 @@ public string Scene;
     {
         Debug.Log ("se n der erro foi milagre");
         Application.Quit();
+    }
+
+    public void Options(){
+        OptionsMenu.SetActive(true);
+        PausePanel.SetActive(false);
     }
 }

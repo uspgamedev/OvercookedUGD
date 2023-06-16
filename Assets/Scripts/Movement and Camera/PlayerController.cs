@@ -68,7 +68,14 @@ public class PlayerController : MonoBehaviour
 
     public bool CheckTable()
     {
-        return Physics2D.Raycast(transform.position, _facingDirection, IgnoreMe);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, _facingDirection, IgnoreMe);
+        if(hit.distance <= 0.7f && hit.distance > 0.02f){
+            return true;
+        }
+        else{
+            return false;
+        }
+        //return Physics2D.Raycast(transform.position, _facingDirection, IgnoreMe);
     }
 
     public Table GetTable()

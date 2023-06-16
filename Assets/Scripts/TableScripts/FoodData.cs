@@ -10,14 +10,14 @@ public class Ingredient
 	//Dados gerais
 	public string[] ingredientArray;
 
-	//Bools para as transições de estado
+	//Bools para as transiï¿½ï¿½es de estado
 	public bool overcookable;
 	public bool sliceable;
 	public bool mixeable;
 
-	//Bools para checar se já passou por tal estado?
+	//Bools para checar se jï¿½ passou por tal estado?
 
-	//Criar um None é mais seguro do que ficar usando null pra checar as coisas. Abaixo, None só tem um get, sem nenhum set.
+	//Criar um None ï¿½ mais seguro do que ficar usando null pra checar as coisas. Abaixo, None sï¿½ tem um get, sem nenhum set.
 	public static Ingredient None { get { return new Ingredient { ingredientArray = new string[] { "" }, sliceable = false, mixeable = false, overcookable = false }; } }
 
 	public Ingredient() { }
@@ -31,7 +31,7 @@ public class Ingredient
 		this.mixeable = mixeable;
     }
 
-	//Método que vê os bools acima e decide se, dentro de um Tuple (vide abaixo), o ingrediente pode transicionar pra outro estado
+	//Mï¿½todo que vï¿½ os bools acima e decide se, dentro de um Tuple (vide abaixo), o ingrediente pode transicionar pra outro estado
 	public bool CanTrasition(State state)
     {
 		switch (state)
@@ -44,7 +44,7 @@ public class Ingredient
         }
     }
 
-	//Abaixo, umas funções úteis só para não cair em problemas envolvendo referências com arrays
+	//Abaixo, umas funï¿½ï¿½es ï¿½teis sï¿½ para nï¿½o cair em problemas envolvendo referï¿½ncias com arrays
 	public void SetIngredientArray(string[] newArray)
     {
 		string[] copiedArray = new string[newArray.Length];
@@ -99,7 +99,7 @@ public class Ingredient
 	#endregion
 }
 
-//Enums não são escalonáveis
+//Enums nï¿½o sï¿½o escalonï¿½veis
 public enum State
 {
 	None,
@@ -134,7 +134,7 @@ public class Tuple
 		sprite = spt;
     }
 
-	//O método abaixo é um tanto desnecessário enquanto tudo for público
+	//O mï¿½todo abaixo ï¿½ um tanto desnecessï¿½rio enquanto tudo for pï¿½blico
 	public static Ingredient GetIngredient(Tuple tuple)
 	{
 		return tuple.ingredient;

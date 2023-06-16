@@ -49,7 +49,8 @@ public class OrdersUI : MonoBehaviour
         OrderSO order = OrdersManager.Instance.GetOrderList()[OrdersManager.Instance.GetOrderList().Count - 1];
         OrderRecipeUI orderRUI = orderCard.GetComponent<OrderRecipeUI>();
         orderRUI.GetComponent<CanvasGroup>().DOFade(1,GameEasings.OrderCardFadeDuration).SetEase(GameEasings.OrderCardFadeEase);
-        orderRUI.SetTimer(maxTime * (OrdersManager.Instance.GetOrderList().Count));
+        //orderRUI.SetTimer(maxTime * (OrdersManager.Instance.GetOrderList().Count));
+        orderRUI.SetTimer(order.expectedTime);
         orderRUI.Name(order);
     }
 

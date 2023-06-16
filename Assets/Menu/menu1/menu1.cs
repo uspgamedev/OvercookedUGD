@@ -9,6 +9,7 @@ public class menu1 : MonoBehaviour
     {
         //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
         SceneManager.LoadScene("FirstLevel");
+        
     }
 
     public void QuitGame()
@@ -19,7 +20,7 @@ public class menu1 : MonoBehaviour
 
     public void MainMenu()
     {
-        SceneManager.LoadScene("Menu 1");
+        SceneManager.LoadScene("Menu 3");
     }
 
 

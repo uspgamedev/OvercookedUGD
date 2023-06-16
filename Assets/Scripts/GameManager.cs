@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     private void OrdersManager_PhaseOneEnd(object sender, System.EventArgs e){
         Paused = true;
-        AudioManager.Instance.Pause();
+        //AudioManager.Instance.Pause();
         Camera.GetComponent<Transform>().DOPunchPosition(GameEasings.CameraShakeVector, GameEasings.CameraShakeDuration).OnComplete(() => StartCoroutine(shakeCamera()));
         //treme
         //passa 1 segundo
@@ -99,7 +99,7 @@ public class GameManager : MonoBehaviour
     IEnumerator waitRecipeManager(){
         PageAlert.SetActive(true);
         PageAlert.GetComponent<CanvasGroup>().DOFade(1f, 1f).SetEase(Ease.InCubic);
-        NextPage.gameObject.SetActive(true);
+        NextPage.gameObject.SetActive(false);
         RecipesUI.GetComponent<RecipesMenu>().unlocked = true;
         yield return new WaitForSeconds(2f);
         PageAlert.GetComponent<CanvasGroup>().DOFade(0f, 1f).SetEase(Ease.InCubic);
@@ -113,12 +113,13 @@ public class GameManager : MonoBehaviour
     private void OrdersManager_GameOver(object sender, OrdersManager.GameOverEventArgs e){
         //Time.timeScale = 0f;
         Paused = true;
-        AudioManager.Instance.Pause();
+        //AudioManager.Instance.Pause();
         RecipesUI.SetActive(false);
         GameOver.GetChild(1).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
         GameOver.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
         GameOver.gameObject.SetActive(true);
         GameOver.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetEase(Ease.InCubic);
+
     }
 
     private void OrdersManager_NextPhase(object sender, OrdersManager.NextPhaseEventArgs e)

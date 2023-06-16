@@ -15,7 +15,9 @@ public class FinalTable : TableClass
     public event EventHandler wrongOrder;
 
     public class DeliveredOrderEventArgs : EventArgs{
-        public int index;
+        //public int index;
+
+        public OrderSO aux;
         public int points;
     }
 
@@ -37,7 +39,8 @@ public class FinalTable : TableClass
             order.End();
             deliveredOrder?.Invoke(this, new DeliveredOrderEventArgs
             {
-                index = orderedIngredients.IndexOf(tableTuples[0].ingredient),
+                //index = orderedIngredients.IndexOf(tableTuples[0].ingredient),
+                aux = order.thisOrder,
                 points = order.points
             });
             //order.gameObject.GetComponent<Transform>().DOPunchPosition(GameEasings.FinalTablePunchVector, GameEasings.FinalTablePunchDuration).OnComplete(()=>

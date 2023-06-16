@@ -7,8 +7,6 @@ public class RecipesMenu : MonoBehaviour
 
     public GameObject Page;
     public GameObject Hint;
-    public GameObject nextPage;
-    public GameObject nextButton;
     private bool pageActive;
     private bool bossActive;
 
@@ -27,9 +25,6 @@ public class RecipesMenu : MonoBehaviour
             bossActive = !bossActive;
         }
         Page.SetActive(!pageActive);
-        nextPage.SetActive(false);
-        secondOpen = false;
-        if(unlocked) nextButton.SetActive(true);
         pageActive = !pageActive;
     }
 
@@ -39,16 +34,7 @@ public class RecipesMenu : MonoBehaviour
             Page.SetActive(!pageActive);
             pageActive = !pageActive;
         }
-        if(secondOpen){
-            nextPage.SetActive(false);
-        }
         Hint.SetActive(!bossActive);
         bossActive = !bossActive;
-    }
-
-    public void NextPage(){
-        nextButton.SetActive(false);
-        secondOpen = true;
-        nextPage.SetActive(true);
     }
 }
