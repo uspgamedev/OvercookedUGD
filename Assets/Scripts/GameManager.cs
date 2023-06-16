@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
         Paused = true;
         //AudioManager.Instance.Pause();
         RecipesUI.SetActive(false);
-        GameOver.GetChild(1).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
+        GameOver.GetChild(2).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
         GameOver.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
         GameOver.gameObject.SetActive(true);
         GameOver.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetEase(Ease.InCubic);
@@ -128,7 +128,7 @@ public class GameManager : MonoBehaviour
         Paused = true;
         AudioManager.Instance.Pause();
         RecipesUI.SetActive(false);
-        NextPhase.GetChild(1).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
+        NextPhase.GetChild(2).GetComponent<Image>().DOFillAmount(e.fillScore / e.totalScore, GameEasings.StarFillDuration).SetEase(GameEasings.StarFillEase);
         NextPhase.GetChild(2).GetChild(1).GetComponent<TextMeshProUGUI>().text = "You scored " + OrdersManager.Instance.GetScore() + " points";
         NextPhase.gameObject.SetActive(true);
         NextPhase.GetComponent<CanvasGroup>().DOFade(1f, 0.5f).SetEase(Ease.InCubic);

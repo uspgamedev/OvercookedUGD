@@ -93,7 +93,7 @@ public class OrdersManager : MonoBehaviour
         possiblePoints = 0;
         passingScore = 20;
         timer = 3f;
-        cooldown = 10f;
+        cooldown = 7f;
         over = false;
         maxRecipes = 5;
         //OrdersUI.Instance.SetTime(10f);
