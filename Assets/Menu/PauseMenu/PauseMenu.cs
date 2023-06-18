@@ -30,6 +30,7 @@ public string Scene;
             paused = false;
             Time.timeScale = 1f;
             PausePanel.SetActive(false);
+            OptionsMenu.SetActive(false);
         }
         else
         {

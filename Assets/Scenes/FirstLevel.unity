@@ -2694,7 +2694,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 4
+  m_SortingOrder: 6
   m_TargetDisplay: 0
 --- !u!224 &145535122
 RectTransform:
@@ -6999,7 +6999,7 @@ GameObject:
   - component: {fileID: 566224116}
   - component: {fileID: 566224115}
   - component: {fileID: 566224114}
-  m_Layer: 0
+  m_Layer: 2
   m_Name: LostPage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -35391,7 +35391,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!224 &2027579378
 RectTransform:
